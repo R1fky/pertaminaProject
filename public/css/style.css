@@ -1,0 +1,28 @@
+.navbar-nav .nav-item.active .nav-link {
+  background-color: #F50537; /* warna primer */
+  color: #fff;
+  border-radius: 4px; /* tambahkan border radius 10px */
+}
+
+/* carosuel */
+
+.carousel {
+  width: 100%;
+}
+
+.carousel-inner {
+  overflow: hidden;
+}
+
+.carousel-item {
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.color-block {
+  width: 100%;
+  height: 100%;
+}
+/* end carosuel */
