@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\LoginSessionController;
 use App\Http\Controllers\TkjpController;
-use App\Models\User;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
 

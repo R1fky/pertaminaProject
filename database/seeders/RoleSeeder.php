@@ -13,19 +13,6 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        $roleData = [
-            [
-                'role_id' => 1,
-                'role_name' => 'organik'
-            ],
-            [
-                'role_id' => 2,
-                'role_name' => 'tkjp'
-            ],
-        ];
-
-        foreach ($roleData as $key => $value) {
-            Role::create($value);
-        }
+        Role::factory()->count(2)->create();
     }
 }
