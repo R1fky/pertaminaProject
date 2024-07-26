@@ -5,7 +5,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item {{ Request::is('home') ? 'active' : '' }}">
-                    <a class="nav-link" href="/">Home</a>
+                    <a class="nav-link" href="/home">Home</a>
                 </li>
                 <li class="nav-item {{ Request::is('daftartkjp') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('daftartkjp') }}">Daftar TKJP</a>

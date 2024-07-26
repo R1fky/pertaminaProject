@@ -1,17 +1,24 @@
 <?php
 
-use App\Http\Controllers\LoginSessionController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TkjpController;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+
 
 Route::get('/', function () {
+    return view('login');
+});
+
+Route::post('/', [LoginController::class, 'login']);
+
+
+Route::get('/home', function () {
     return view('homePage');
 });
+
+
 
 Route::get('/health', function () {
     return view('kategoriKerja.health');

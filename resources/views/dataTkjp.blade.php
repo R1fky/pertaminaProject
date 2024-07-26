@@ -58,127 +58,101 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        {{-- <form action="{{ route('daftartkjp.add') }}" method="POST">
-              @csrf
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="mb-3">
-                      <label for="name" class="form-label">Name</label>
-                      <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}">
-                      @error('name')
-                          <div class="invalid-feedback">{{ $message }}</div>
-                      @enderror
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}">
-                    @error('email')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password">
-                    @error('password')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="mb-3">
-                    <label for="bagian" class="form-label">Bagian</label>
-                    <input type="text" class="form-control @error('bagian') is-invalid @enderror" id="bagian" name="bagian" value="{{ old('bagian') }}">
-                    @error('bagian')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="mb-3">
-                    <label for="first_name" class="form-label">First Name</label>
-                    <input type="text" class="form-control @error('first_name') is-invalid @enderror" id="first_name" name="first_name" value="{{ old('first_name') }}">
-                    @error('first_name')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="mb-3">
-                    <label for="last_name" class="form-label">Last Name</label>
-                    <input type="text" class="form-control @error('last_name') is-invalid @enderror" id="last_name" name="last_name" value="{{ old('last_name') }}">
-                    @error('last_name')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="mb-3">
-                    <label for="role_id" class="form-label">Role</label>
-                    <select class="form-select @error('role_id') is-invalid @enderror" aria-label="Default select example" name="role_id">
-                        <option selected>Pilih Role</option>
-                        @foreach ($roles as $role)
-                        <option value="{{ $role->role_id }}">{{ $role->role_name }}</option>
-                        @endforeach
-                    </select>
-                    @error('role_id')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                  </div>
-                </div>
-              </div>
-          
-              <button class="btn btn-primary">Save</button>
-          </form> --}}
+
+                        {{-- form validate  --}}
                         <form action="{{ route('daftartkjp.add') }}" method="POST">
                             @csrf
-                            <div class="mb-3">
-                                <div class="row">
-                                    <div class="col-6">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
                                         <label for="name" class="form-label">Name</label>
-                                        <input type="text" class="form-control" id="name" name="name">
-                                    </div>
-                                    <div class="col-6">
-                                        <label for="email" class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="email" name="email">
-                                    </div>
-                                    <div class="col-6">
-                                        <label for="password" class="form-label">Password</label>
-                                        <input type="password" class="form-control" id="password" name="password">
-                                    </div>
-                                    <div class="col-6">
-                                        <label for="bagian" class="form-label">Bagian</label>
-                                        <input type="text" class="form-control" id="bagian" name="bagian">
-                                    </div>
-                                    <div class="col-6">
-                                        <label for="firt_name" class="form-label">First Name</label>
-                                        <input type="text" class="form-control" id="first_name" name="first_name">
-                                    </div>
-                                    <div class="col-6">
-                                        <label for="last_name" class="form-label">Last Name</label>
-                                        <input type="text" class="form-control" id="last_name" name="last_name">
+                                        <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                            id="name" name="name" value="{{ old('name') }}">
+                                        @error('name')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
-                                <select class="form-select mt-3" aria-label="Default select example" name="role_id">
-                                    <option selected>Pilih Role</option>
-                                    @foreach ($roles as $role)
-                                        <option value="{{ $role->role_id }}">{{ $role->role_name }}</option>
-                                    @endforeach
-                                </select>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" class="form-control @error('email') is-invalid @enderror"
+                                            id="email" name="email" value="{{ old('email') }}">
+                                        @error('email')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="password" class="form-label">Password</label>
+                                        <input type="password"
+                                            class="form-control @error('password') is-invalid @enderror" id="password"
+                                            name="password">
+                                        @error('password')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="bagian" class="form-label">Bagian</label>
+                                        <input type="text" class="form-control @error('bagian') is-invalid @enderror"
+                                            id="bagian" name="bagian" value="{{ old('bagian') }}">
+                                        @error('bagian')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="first_name" class="form-label">First Name</label>
+                                        <input type="text"
+                                            class="form-control @error('first_name') is-invalid @enderror"
+                                            id="first_name" name="first_name" value="{{ old('first_name') }}">
+                                        @error('first_name')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="last_name" class="form-label">Last Name</label>
+                                        <input type="text"
+                                            class="form-control @error('last_name') is-invalid @enderror"
+                                            id="last_name" name="last_name" value="{{ old('last_name') }}">
+                                        @error('last_name')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="role_id" class="form-label">Role</label>
+                                        <select class="form-select @error('role_id') is-invalid @enderror"
+                                            aria-label="Default select example" name="role_id">
+                                            <option selected>Pilih Role</option>
+                                            @foreach ($roles as $role)
+                                                <option value="{{ $role->role_id }}">{{ $role->role_name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('role_id')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
                             <button class="btn btn-primary">Save</button>
                         </form>
+                        {{-- end form validate  --}}
                     </div>
                 </div>
             </div>
+            {{-- end Modal --}}
         </div>
-        {{-- end Modal --}}
-    </div>
 </x-layouts>
