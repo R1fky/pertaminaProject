@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use function Laravel\Prompts\alert;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class TkjpController extends Controller
 {
@@ -26,6 +27,7 @@ class TkjpController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
+            'image' => 'required|mimes:png,jpg,jpeg,jfif',
             'password' => 'required|string|min:8|',
             'bagian' => 'required|string|max:255',
             'role_id' => 'required|integer',
@@ -33,6 +35,11 @@ class TkjpController extends Controller
             'last_name' => 'required|string|max:255',
         ]);
 
+        $image = $request->file('image');
+        $filename = date('Y-m-d').$image->getClientOriginalName();
+        $path = 'images/'.$filename;
+        Storage::disk('public')->put($path,file_get_contents($image));
+        
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
@@ -41,7 +48,7 @@ class TkjpController extends Controller
         $user->role_id = $request->role_id;
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
-
+        $user->image = $filename;
         $user->save();
 
         if ($user->save()) {

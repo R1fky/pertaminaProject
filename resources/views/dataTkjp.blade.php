@@ -73,7 +73,7 @@
                                 {{-- end dalete data  --}}
                             </div>
                             <div class="col-4">
-                                <img src="/img/profil/profile-tkjp.jfif" class="img-fluid"
+                                <img src="{{ asset('storage/images/'.$user->image) }}" class="img-fluid"
                                     style="width: 120px; height: 150px;" alt="...">
                             </div>
                         </div>
@@ -94,7 +94,7 @@
                     <div class="modal-body">
 
                         {{-- form validate  --}}
-                        <form action="{{ route('daftartkjp.add') }}" method="POST">
+                        <form action="{{ route('daftartkjp.add') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-md-6">
@@ -113,6 +113,16 @@
                                         <input type="email" class="form-control @error('email') is-invalid @enderror"
                                             id="email" name="email" value="{{ old('email') }}">
                                         @error('email')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Upload Image</label>
+                                        <input type="file" class="form-control @error('image') is-invalid @enderror"
+                                            id="image" name="image" value="{{ old('image') }}">
+                                        @error('image')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
