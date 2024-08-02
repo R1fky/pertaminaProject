@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TkjpController;
+use App\Http\Controllers\TugasController;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
 
@@ -11,9 +12,9 @@ Route::get('/', function () {
     return view('homePage');
 });
 
-Route::get('/health', function () {
-    return view('kategoriKerja.health');
-});
+//daftar kerja categori
+Route::get('/health', [TugasController::class, 'show']);
+
 Route::get('/safety', function () {
     return view('kategoriKerja.safety');
 });
