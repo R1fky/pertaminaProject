@@ -48,5 +48,13 @@ class TkjpController extends Controller
             Session::flash('success', 'Data berhasil ditambahkan!');
             return redirect()->route('daftartkjp');
         }
+        
+    }
+
+    //delete
+    public function delete(User $user) {
+        $user->delete();
+    
+        return redirect()->route('daftartkjp')->with('danger', 'data berhasil dihapus');
     }
 }

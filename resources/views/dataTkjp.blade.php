@@ -5,6 +5,12 @@
                 {{ Session::get('success') }}
             </div>
         @endif
+
+        @if (session('danger'))
+            <div class="alert alert-danger">
+                {{ session('danger') }}
+            </div>
+        @endif
         {{-- header --}}
         <div class="row mt-5 align-items-center justify-content-between border-bottom border-dark">
             <div class="col-md-6 col-sm-12">
@@ -36,7 +42,34 @@
                                 {{-- menampilkan Role  --}}
                                 <a href="#" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
                                 <a href="#" class="btn btn-primary"><i class="bi bi-clipboard2-data"></i></a>
-                                <a href="#" class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                                {{-- button delet data  --}}
+                                <button type="button" class="btn btn-danger mb-2 mb-sm-0 me-sm-2"
+                                    data-bs-toggle="modal" data-bs-target="#hapusModal">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                                {{-- end button delet data  --}}
+
+                                <!-- Modal Delet data-->
+                                <div class="modal fade" id="hapusModal" tabindex="-1" role="dialog"
+                                    aria-labelledby="hapusModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Data TKJP</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Yakin ingin hapus data?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a href="{{ route('daftartkjp.delete', $user->email) }}"
+                                                    class="btn btn-danger">Hapus</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- end dalete data  --}}
                             </div>
                             <div class="col-4">
                                 <img src="/img/profil/profile-tkjp.jfif" class="img-fluid"
@@ -89,8 +122,8 @@
                                     <div class="mb-3">
                                         <label for="password" class="form-label">Password</label>
                                         <input type="password"
-                                            class="form-control @error('password') is-invalid @enderror" id="password"
-                                            name="password">
+                                            class="form-control @error('password') is-invalid @enderror"
+                                            id="password" name="password">
                                         @error('password')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -99,8 +132,9 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="bagian" class="form-label">Bagian</label>
-                                        <input type="text" class="form-control @error('bagian') is-invalid @enderror"
-                                            id="bagian" name="bagian" value="{{ old('bagian') }}">
+                                        <input type="text"
+                                            class="form-control @error('bagian') is-invalid @enderror" id="bagian"
+                                            name="bagian" value="{{ old('bagian') }}">
                                         @error('bagian')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -137,7 +171,7 @@
                                             aria-label="Default select example" name="role_id">
                                             <option selected>Pilih Role</option>
                                             @foreach ($roles as $role)
-                                                <option value="{{ $role->role_id }}">{{ $role->role_name }}</option>
+                                                <option value="{{ $role->id }}">{{ $role->role_name }}</option>
                                             @endforeach
                                         </select>
                                         @error('role_id')

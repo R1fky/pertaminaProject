@@ -8,17 +8,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('login');
-});
-
-Route::post('/', [LoginController::class, 'login']);
-
-
-Route::get('/home', function () {
     return view('homePage');
 });
-
-
 
 Route::get('/health', function () {
     return view('kategoriKerja.health');
@@ -34,4 +25,9 @@ Route::get('/environment', function () {
 });
 
 Route::get('/daftartkjp', [TkjpController::class, 'show'])->name('daftartkjp');
+
+// menambahkan data 
 Route::post('/daftartkjp/add', [TkjpController::class, 'add'])->name('daftartkjp.add');
+
+//menghapus data
+Route::get('/daftartkjp/delete/{user:email}', [TkjpController::class, 'delete'])->name('daftartkjp.delete');

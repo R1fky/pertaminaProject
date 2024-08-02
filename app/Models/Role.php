@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Role extends Model
 {
     use HasFactory;
-    protected $fillable = ['role_id', 'role_name'];
+    protected $fillable = ['role_name'];
 
     public function user():HasMany {
         return $this->hasMany(User::class, 'role_id');
