@@ -12,8 +12,15 @@ Route::get('/', function () {
     return view('homePage');
 });
 
+Route::get('/daftartugas', [TugasController::class, 'show'])->name('daftartugas');
+
+//menambahkan daftar tugas
+Route::post('/daftartugas/add', [TugasController::class, 'add'])->name('daftartugas.add');
+
+
+
 //daftar kerja categori
-Route::get('/health', [TugasController::class, 'show']);
+// Route::get('/health', [TugasController::class, 'show']);
 
 Route::get('/safety', function () {
     return view('kategoriKerja.safety');

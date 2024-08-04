@@ -7,14 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class CategoryTugas extends Model
+class PicCategory extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'category_name',
+
+    protected $fillabel = [
+        'name_pic',
     ];
 
-    public function tugas():HasMany {
-        return $this->hasMany(Tugas::class, 'category_id');
+    public function pic():HasMany {
+        return $this->hasMany(Tugas::class, 'pic_id');
     }
 }

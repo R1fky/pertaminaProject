@@ -94,16 +94,18 @@
             <div class="col-md-2 col-sm-4 col-6 mb-4">
                 <div class="card" style="width: 100%; margin-bottom: 20px;">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+                        <h5 class="card-title">1</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Jumlah Tugas</h6>
+                        <a href="{{ route('daftartugas') }}" class="btn btn-outline-info btn-sm">Lihat Tugas</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-2 col-sm-4 col-6 mb-4">
                 <div class="card" style="width: 100%; margin-bottom: 20px;">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+                        <h5 class="card-title">2</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Jumlah Tugas</h6>
+                        <a href="" class="btn btn-outline-info btn-sm">Lihat Tugas</a>
                     </div>
                 </div>
             </div>

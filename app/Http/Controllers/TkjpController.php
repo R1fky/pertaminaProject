@@ -27,13 +27,14 @@ class TkjpController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'image' => 'required|mimes:png,jpg,jpeg,jfif',
+            'image' => 'required|mimes:png,jpg,jpeg,jfif|max:2046',
             'password' => 'required|string|min:8|',
             'bagian' => 'required|string|max:255',
             'role_id' => 'required|integer',
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
         ]);
+
 
         $image = $request->file('image');
         $filename = date('Y-m-d').$image->getClientOriginalName();
@@ -55,7 +56,6 @@ class TkjpController extends Controller
             Session::flash('success', 'Data berhasil ditambahkan!');
             return redirect()->route('daftartkjp');
         }
-        
     }
 
     //delete
