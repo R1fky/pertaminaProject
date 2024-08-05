@@ -14,10 +14,9 @@
             </button>
             <select class="form-select form-select-sm ms-2" style="width: 110px;" aria-label="Default select example">
                 <option selected>Category</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-                <option value="3">Four</option>
+                @foreach ($categorys as $category)
+                    <option  value="{{ $category->id }}">{{ $category->category_name }}</option>
+                @endforeach
             </select>
         </div>
 
@@ -27,7 +26,7 @@
                     <th scope="col">No</th>
                     <th scope="col">Nama Tugas</th>
                     <th scope="col">Frekuensi</th>
-                    <th scope="col">Document</th>
+                    <th scope="col">Bulan</th>
                     <th scope="col">Category</th>
                     <th scope="col">PIC</th>
                     <th scope="col">Status</th>
@@ -41,7 +40,7 @@
                         <th scope="row">{{ $no + 1 }}</th>
                         <td>{{ $tugas->nama_tugas }}</td>
                         <td>{{ $tugas->frekuensi }}</td>
-                        <td>{{ $tugas->document }}</td>
+                        <td>{{ $tugas->bulan }}</td>
                         <td>{{ $tugas->category->category_name }}</td>
                         <td>{{ $tugas->pic->name_pic }}</td>
                         <td>{{ $tugas->status }}</td>
@@ -82,42 +81,62 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="frekuensi" class="form-label">Frekuensi</label>
-                                    <input type="frekuensi"
-                                        class="form-control @error('frekuensi') is-invalid @enderror" id="frekuensi"
-                                        name="frekuensi" value="{{ old('frekuensi') }}">
+                                    <select class="form-select @error('frekuensi') is-invalid @enderror"
+                                        aria-label="Default select example" name="frekuensi">
+                                        <option selected>Pilih Frekuensi</option>
+                                        <option value="tahunan">Tahunan</option>
+                                        <option value="bulanan">Bulanan</option>
+                                        <option value="mingguan">Mingguan</option>
+                                    </select>
                                     @error('frekuensi')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col">
-                                <div class="mb-3">
-                                    <label for="document" class="form-label">Upload Document</label>
-                                    <input type="file" class="form-control @error('document') is-invalid @enderror"
-                                        id="document" name="document" value="{{ old('document') }}">
-                                    @error('document')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="bulan" class="form-label">Bulan</label>
+                                        <select class="form-select @error('bulan') is-invalid @enderror"
+                                            aria-label="Default select example" name="bulan">
+                                            <option selected>Pilih Bulan</option>
+                                            <option value="januari">Januari</option>
+                                            <option value="februari">Februari</option>
+                                            <option value="maret">Maret</option>
+                                            <option value="april">April</option>
+                                            <option value="mei">Mei</option>
+                                            <option value="juni">Juni</option>
+                                            <option value="juli">Juli</option>
+                                            <option value="agustus">Agustus</option>
+                                            <option value="september">September</option>
+                                            <option value="oktober">Oktober</option>
+                                            <option value="november">November</option>
+                                            <option value="desember">Desember</option>
+                                        </select>
+                                        @error('bulan')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="category_id" class="form-label">Category</label>
+                                        <select class="form-select @error('category_id') is-invalid @enderror"
+                                            aria-label="Default select example" name="category_id">
+                                            <option selected>Pilih Category</option>
+                                            @foreach ($categorys as $category)
+                                                <option value="{{ $category->id }}">{{ $category->category_name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('category_id')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="category_id" class="form-label">Category</label>
-                                    <select class="form-select @error('category_id') is-invalid @enderror"
-                                        aria-label="Default select example" name="category_id">
-                                        <option selected>Pilih Category</option>
-                                        @foreach ($categorys as $category)
-                                            <option value="{{ $category->id }}">{{ $category->category_name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    @error('category_id')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="pic_id" class="form-label">PIC</label>
@@ -133,9 +152,6 @@
                                     @enderror
                                 </div>
                             </div>
-
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="status" class="form-label">Status</label>
@@ -146,18 +162,23 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="deskripsi" class="form-label">deskripsi</label>
-                                    <input type="text"
-                                        class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi"
-                                        name="deskripsi" value="{{ old('deskripsi') }}">
-                                    @error('deskripsi')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
                         </div>
+                        <div class="mb-3">
+                            <label for="deskripsi" class="form-label">Deskripsi</label>
+                            <textarea class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" name="deskripsi"
+                                value="{{ old('deskripsi') }}" rows="3"></textarea>
+                            @error('deskripsi')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        {{-- <div class="mb-3">
+                            <label for="deskripsi" class="form-label">Deskripsi</label>
+                            <input type="text" class="form-control @error('deskripsi') is-invalid @enderror"
+                                id="deskripsi" name="deskripsi" value="{{ old('deskripsi') }}">
+                            @error('deskripsi')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div> --}}
                         <button class="btn btn-primary">Save changes</button>
                     </form>
                     {{-- end form validate  --}}

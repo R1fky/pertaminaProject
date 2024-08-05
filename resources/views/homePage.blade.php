@@ -29,58 +29,31 @@
     <div class="container">
         <h1 class="text-center mt-5">Daftar Kerja</h1>
         <div class="row d-flex justify-content-between kotak-kerja">
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                <div class="card mt-5 mx-auto" style="width: 16rem; background-color: #F8DFC2;">
-                    <div class="card-body">
-                        <h5 class="card-title"><a href="/health"
-                                style="text-decoration: none; color: inherit;">Health</a></h5>
-                        <h6 class="card-subtitle mb-2 text-body-secondary">Jumlah Tugas</h6>
-                        <div class="progress" role="progressbar" aria-label="Info example" aria-valuenow="50"
-                            aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar bg-info text-dark" style="width: 50%">50%</div>
+            @foreach ($categorys as $category)
+                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                    <div class="card mt-5 mx-auto" style="width: 16rem; 
+            @if ($category->category_name == 'health') background-color: #F8DFC2;
+            @elseif($category->category_name == 'safety')
+                background-color: #F50537;
+            @elseif($category->category_name == 'security')
+                background-color: #3399FF;
+            @else
+                background-color: #0EB24E; 
+            @endif ">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="/health/{{  }}"
+                                    style="text-decoration: none; color: inherit;">{{ $category->category_name }}</a>
+                            </h5>
+                            <h6 class="card-subtitle mb-2 text-body-secondary">Jumlah Tugas</h6>
+                            <div class="progress" role="progressbar" aria-label="Info example" aria-valuenow="50"
+                                aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar bg-info text-dark" style="width: 50%">50%</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                <div class="card mt-5 mx-auto" style="width: 16rem; background-color: #F50537;">
-                    <div class="card-body">
-                        <h5 class="card-title"><a href="/safety"
-                                style="text-decoration: none; color: inherit;">Safety</a></h5>
-                        <h6 class="card-subtitle mb-2 text-body-secondary">Jumlah Tugas</h6>
-                        <div class="progress" role="progressbar" aria-label="Info example" aria-valuenow="50"
-                            aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar bg-info text-dark" style="width: 50%">50%</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                <div class="card mt-5 mx-auto" style="width: 16rem; background-color: #3399FF;">
-                    <div class="card-body">
-                        <h5 class="card-title"><a href="/security"
-                                style="text-decoration: none; color: inherit;">Security</a></h5>
-                        <h6 class="card-subtitle mb-2 text-body-secondary">Jumlah Tugas</h6>
-                        <div class="progress" role="progressbar" aria-label="Info example" aria-valuenow="50"
-                            aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar bg-info text-dark" style="width: 50%">50%</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                <div class="card mt-5 mx-auto" style="width: 16rem; background-color: #0EB24E;">
-                    <div class="card-body">
-                        <h5 class="card-title"><a href="/environment"
-                                style="text-decoration: none; color: inherit;">Environment</a></h5>
-                        <h6 class="card-subtitle mb-2 text-body-secondary">Jumlah Tugas</h6>
-                        <div class="progress" role="progressbar" aria-label="Info example" aria-valuenow="50"
-                            aria-valuemin="0" aria-valuemax="100">
-                            <div class="progress-bar bg-info text-dark" style="width: 50%">50%</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
     {{-- end daftar kerja --}}

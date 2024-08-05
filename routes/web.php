@@ -3,13 +3,17 @@
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TkjpController;
 use App\Http\Controllers\TugasController;
+use App\Models\CategoryTugas;
+use App\Models\Tugas;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
 
 
 
 Route::get('/', function () {
-    return view('homePage');
+    return view('homePage', [
+        'categorys' => CategoryTugas::all()
+    ]);
 });
 
 Route::get('/daftartugas', [TugasController::class, 'show'])->name('daftartugas');

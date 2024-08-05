@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('nama_tugas');
             $table->string('deskripsi');
             $table->string('frekuensi');
-            $table->string('document');
             $table->unsignedBigInteger('category_id');
             $table->string('status');
             $table->timestamps();

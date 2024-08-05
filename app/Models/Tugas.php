@@ -16,7 +16,7 @@ class Tugas extends Model
         'deskripsi',
         'frekuensi',
         'pic_id',
-        'document',
+        'bulan',
         'category_id',
         'status'
     ];
