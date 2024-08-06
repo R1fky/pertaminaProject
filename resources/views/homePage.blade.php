@@ -42,7 +42,7 @@
             @endif ">
                         <div class="card-body">
                             <h5 class="card-title">
-                                <a href="/health/{{  }}"
+                                <a href=""
                                     style="text-decoration: none; color: inherit;">{{ $category->category_name }}</a>
                             </h5>
                             <h6 class="card-subtitle mb-2 text-body-secondary">Jumlah Tugas</h6>

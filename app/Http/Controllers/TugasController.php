@@ -50,4 +50,5 @@ class TugasController extends Controller
             return redirect()->route('daftartugas');
         }
     }
+    
 }

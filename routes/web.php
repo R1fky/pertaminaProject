@@ -26,6 +26,12 @@ Route::post('/daftartugas/add', [TugasController::class, 'add'])->name('daftartu
 //daftar kerja categori
 // Route::get('/health', [TugasController::class, 'show']);
 
+Route::get('/health{category:category_name}', function() {
+    return view('daftartugas', [
+        
+    ]);
+});
+
 Route::get('/safety', function () {
     return view('kategoriKerja.safety');
 });
