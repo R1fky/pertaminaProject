@@ -31,18 +31,18 @@
         <div class="row d-flex justify-content-between kotak-kerja">
             @foreach ($categorys as $category)
                 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                    <div class="card mt-5 mx-auto" style="width: 16rem; 
+                    <div class="card mt-5 mx-auto"
+                        style="width: 16rem; 
             @if ($category->category_name == 'health') background-color: #F8DFC2;
             @elseif($category->category_name == 'safety')
                 background-color: #F50537;
             @elseif($category->category_name == 'security')
                 background-color: #3399FF;
             @else
-                background-color: #0EB24E; 
-            @endif ">
+                background-color: #0EB24E; @endif ">
                         <div class="card-body">
                             <h5 class="card-title">
-                                <a href=""
+                                <a href="/kategorikerja/{{ $category->category_name  }}"
                                     style="text-decoration: none; color: inherit;">{{ $category->category_name }}</a>
                             </h5>
                             <h6 class="card-subtitle mb-2 text-body-secondary">Jumlah Tugas</h6>
