@@ -42,7 +42,7 @@
                 background-color: #0EB24E; @endif ">
                         <div class="card-body">
                             <h5 class="card-title">
-                                <a href="/kategorikerja/{{ $category->category_name  }}"
+                                <a href="/kategorikerja/{{ $category->category_name }}"
                                     style="text-decoration: none; color: inherit;">{{ $category->category_name }}</a>
                             </h5>
                             <h6 class="card-subtitle mb-2 text-body-secondary">Jumlah Tugas</h6>
@@ -63,57 +63,20 @@
     <div class="container mt-5"
         style="background-color: #F6F5F5; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); padding-top: 20px; border-radius: 15px; padding-bottom: 20px;">
         <h1 class="text-center mb-5" style="margin-top: 20px;">Jadwal Kalender Kerja</h1>
+
         <div class="row justify-content-center">
-            <div class="col-md-2 col-sm-4 col-6 mb-4">
-                <div class="card" style="width: 100%; margin-bottom: 20px;">
-                    <div class="card-body">
-                        <h5 class="card-title">1</h5>
-                        <h6 class="card-subtitle mb-2 text-body-secondary">Jumlah Tugas</h6>
-                        <a href="{{ route('daftartugas') }}" class="btn btn-outline-info btn-sm">Lihat Tugas</a>
+            @foreach ($bulans as $bulan)
+                <div class="col-md-2 col-sm-4 col-6 mb-4">
+                    <div class="card" style="width: 100%; margin-bottom: 20px;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $bulan->nama_bulan }}</h5>
+                            <h6 class="card-subtitle mb-2 text-body-secondary"></h6>
+                            <a href="/daftartugas/{{ $bulan->nama_bulan }}" class="btn btn-outline-info btn-sm">Lihat
+                                Tugas</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-2 col-sm-4 col-6 mb-4">
-                <div class="card" style="width: 100%; margin-bottom: 20px;">
-                    <div class="card-body">
-                        <h5 class="card-title">2</h5>
-                        <h6 class="card-subtitle mb-2 text-body-secondary">Jumlah Tugas</h6>
-                        <a href="" class="btn btn-outline-info btn-sm">Lihat Tugas</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2 col-sm-4 col-6 mb-4">
-                <div class="card" style="width: 100%; margin-bottom: 20px;">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2 col-sm-4 col-6 mb-4">
-                <div class="card" style="width: 100%; margin-bottom: 20px;">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2 col-sm-4 col-6 mb-4">
-                <div class="card" style="width: 100%; margin-bottom: 20px;">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2 col-sm-4 col-6 mb-4">
-                <div class="card" style="width: 100%; margin-bottom: 20px;">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
     {{-- end jadwal kerja --}}

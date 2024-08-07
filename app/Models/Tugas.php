@@ -27,4 +27,8 @@ class Tugas extends Model
     public function pic():BelongsTo {
         return $this->belongsTo(PicCategory::class);
     }
+
+    public function bulan():BelongsTo {
+        return $this->belongsTo(Bulan::class);
+    }
 }

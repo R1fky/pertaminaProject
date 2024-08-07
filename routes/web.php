@@ -1,21 +1,26 @@
 <?php
 
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\TkjpController;
-use App\Http\Controllers\TugasController;
-use App\Models\CategoryTugas;
+use App\Models\Bulan;
 use App\Models\Tugas;
+use App\Models\CategoryTugas;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
-
-
+use App\Http\Controllers\TkjpController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\TugasController;
+use App\Models\PicCategory;
 
 Route::get('/', function () {
     $categorys = CategoryTugas::all();
-    return view('homePage', compact('categorys'));
-});
+    $pics = PicCategory::all();
+    $bulans = Bulan::all();
+    return view('homePage', compact('categorys', 'bulans', 'pics'));
+})->name('/');
 
-Route::get('/daftartugas', [TugasController::class, 'show'])->name('daftartugas');
+//menampilkan seluruh daftar kerja dan 
+Route::get('/daftarkerja', [TugasController::class, 'tampil'])->name('daftarkerja');
+
+Route::get('/daftartugas/{bulan:nama_bulan}', [TugasController::class, 'show']);
 
 //menambahkan daftar tugas
 Route::post('/daftartugas/add', [TugasController::class, 'add'])->name('daftartugas.add');

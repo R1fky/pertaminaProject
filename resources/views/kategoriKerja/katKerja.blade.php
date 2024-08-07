@@ -18,7 +18,7 @@
                         <td class="text-center">{{ $no + 1 }}</td>
                         <td>{{ $tgs->nama_tugas }}</td>
                         <td>{{ $tgs->frekuensi }}</td>
-                        <td>{{ $tgs->bulan }}</td>
+                        <td>{{ $tgs->bulan->nama_bulan }}</td>
                         <td>{{ $tgs->pic->name_pic }}</td>
                         <td>{{ $tgs->status }}</td>
                         <td class="text-center">
@@ -63,7 +63,7 @@
                                 <div class="col-md-6">
                                     <label for="bulan" class="form-label">Bulan</label>
                                     <input class="form-control" type="text" placeholder="Disabled input"
-                                        aria-label="Disabled input example" value="{{ $tgs->bulan }}" disabled>
+                                        aria-label="Disabled input example" value="{{ $tgs->bulan->nama_bulan }}" disabled>
                                 </div>
                             </div>
                             <div class="row mt-3">
