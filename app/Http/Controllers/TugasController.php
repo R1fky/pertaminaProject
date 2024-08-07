@@ -61,5 +61,11 @@ class TugasController extends Controller
             return redirect()->route('daftarkerja');
         }
     }
+
+    public function delete(Tugas $tugas) {
+        $tugas->delete();
+
+        return redirect()->route('daftarkerja')->with('danger', 'Data Berhasil Dihapus');
+    }
     
 }

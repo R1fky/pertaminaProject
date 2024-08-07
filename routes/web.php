@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('homePage', compact('categorys', 'bulans', 'pics'));
 })->name('/');
 
-//menampilkan seluruh daftar kerja dan 
+//menampilkan seluruh daftar kerja 
 Route::get('/daftarkerja', [TugasController::class, 'tampil'])->name('daftarkerja');
 
 Route::get('/daftartugas/{bulan:nama_bulan}', [TugasController::class, 'show']);
@@ -34,13 +34,8 @@ Route::get('/kategorikerja/{category:category_name}', function(CategoryTugas $ca
     ]);
 });
 
-// Route::get('/katKerja/{category:id}', function(CategoryTugas $category) {
-
-//     return view('kategoriKerja.katKerja',[
-//         'tugas' => $category->tugas,
-//         'category' => $category
-//     ]);
-// });
+//mengahpus daftar tugas
+Route::get('/daftartugas/delete/{tugas:id}', [TugasController::class, 'delete']);
 
 Route::get('/daftartkjp', [TkjpController::class, 'show'])->name('daftartkjp');
 

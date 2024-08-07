@@ -6,6 +6,11 @@
                 {{ Session::get('success') }}
             </div>
         @endif
+        @if (Session::has('danger'))
+            <div class="alert alert-danger">
+                {{ Session::get('danger')}}
+            </div>
+        @endif
 
         <!-- Button trigger modal -->
         <div class="d-flex align-items-center mb-4">
@@ -48,8 +53,11 @@
                         <td class="text-center">
                             <div class="btn-group" role="group">
                                 <a href="" class="btn btn-info btn-sm me-2"><i class="bi bi-info-lg"></i></a>
-                                <a href="" class="btn btn-warning btn-sm me-2"><i class="bi bi-pencil-square"></i></a>
-                                <a href="" class="btn btn-danger btn-sm"><i class="bi bi-trash3"></i></a>
+                                <a href="" class="btn btn-warning btn-sm me-2"><i
+                                        class="bi bi-pencil-square"></i></a>
+                                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#deleteTugas{{ $tugas->id }}"><i class="bi bi-trash3"></i></i>
+                                </button>
                             </div>
                         </td>
                     </tr>
@@ -58,7 +66,7 @@
         </table>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal tambah Tugas -->
     <div class="modal fade" id="tambahTugas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -173,5 +181,29 @@
             </div>
         </div>
     </div>
-    {{-- end modal  --}}
+    {{-- end modal tambah Tugas --}}
+
+    {{-- Modal delete Tugas --}}
+    @foreach ($tugass as $tugas)
+        <div class="modal fade" id="deleteTugas{{ $tugas->id }}" tabindex="-1" role="dialog"
+            aria-labelledby="hapusModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Tugas {{ $tugas->nama_tugas }}
+                        </h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Yakin ingin hapus data?
+                    </div>
+                    <div class="modal-footer">
+                        <a href="/daftartugas/delete/{{ $tugas->id }}" class="btn btn-danger">Hapus</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+    {{-- end dalete data  --}}
 </x-layouts>
