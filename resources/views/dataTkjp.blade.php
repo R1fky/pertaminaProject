@@ -44,24 +44,24 @@
                                 <a href="#" class="btn btn-primary"><i class="bi bi-clipboard2-data"></i></a>
                                 {{-- button delet data  --}}
                                 <button type="button" class="btn btn-danger mb-2 mb-sm-0 me-sm-2"
-                                    data-bs-toggle="modal" data-bs-target="#hapusModal">
+                                    data-bs-toggle="modal" data-bs-target="#hapusModal{{ $user->id }}">
                                     <i class="bi bi-trash"></i>
                                 </button>
                                 {{-- end button delet data  --}}
 
                                 <!-- Modal Delet data-->
-                                <div class="modal fade" id="hapusModal" tabindex="-1" role="dialog"
+                                <div class="modal fade" id="hapusModal{{ $user->id }}" tabindex="-1" role="dialog"
                                     aria-labelledby="hapusModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Data TKJP
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Data TKJP {{ $user->name }}
                                                 </h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                Yakin ingin hapus data?
+                                                Yakin ingin hapus data? {{ $user->email }}
                                             </div>
                                             <div class="modal-footer">
                                                 <a href="{{ route('daftartkjp.delete', $user->email) }}"

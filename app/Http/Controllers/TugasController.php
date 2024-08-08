@@ -67,5 +67,12 @@ class TugasController extends Controller
 
         return redirect()->route('daftarkerja')->with('danger', 'Data Berhasil Dihapus');
     }
+
+    public function edit(Request $request, Tugas $tugas) {
+
+        $tugas->update($request->all());
+
+        return redirect()->route('daftarkerja')->with('success', 'Data Berhasil Diedit');
+    }
     
 }

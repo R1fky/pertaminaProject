@@ -37,6 +37,9 @@ Route::get('/kategorikerja/{category:category_name}', function(CategoryTugas $ca
 //mengahpus daftar tugas
 Route::get('/daftartugas/delete/{tugas:id}', [TugasController::class, 'delete']);
 
+//edit daftar tugas
+Route::post('/daftartugas/edit/{tugas:id}', [TugasController::class, 'edit']);
+
 Route::get('/daftartkjp', [TkjpController::class, 'show'])->name('daftartkjp');
 
 // menambahkan data 
