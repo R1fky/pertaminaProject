@@ -1,5 +1,6 @@
 <x-layouts>
     <div class="container mt-5">
+        <h1 class="mt-5 mb-4">Daftar Tugas Kerja {{ $category->category_name }}</h1>
         <table class="table table-stripedmt mt-5">
             <thead>
                 <tr>

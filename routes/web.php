@@ -9,40 +9,49 @@ use App\Http\Controllers\TkjpController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TugasController;
 use App\Models\PicCategory;
+use Illuminate\Support\Facades\Log;
+use Symfony\Component\HttpKernel\Event\ViewEvent;
 
 Route::get('/', function () {
-    $categorys = CategoryTugas::all();
-    $pics = PicCategory::all();
-    $bulans = Bulan::all();
-    return view('homePage', compact('categorys', 'bulans', 'pics'));
-})->name('/');
+    return view('login');
+})->name('login')->middleware('guest');
 
-//menampilkan seluruh daftar kerja 
-Route::get('/daftarkerja', [TugasController::class, 'tampil'])->name('daftarkerja');
+//proses login
+Route::post('/login', [LoginController::class, 'loginproses']);
+Route::post('/logout', [LoginController::class, 'logout']);
 
-Route::get('/daftartugas/{bulan:nama_bulan}', [TugasController::class, 'show']);
 
-//menambahkan daftar tugas
-Route::post('/daftartugas/add', [TugasController::class, 'add'])->name('daftartugas.add');
+Route::group(['middleware' => 'auth'], function () {
+    // Routes that require authentication
+    Route::get('/home', function () {
+        $categorys = CategoryTugas::all();
+        $pics = PicCategory::all();
+        $bulans = Bulan::all();
+        return view('homePage', compact('categorys', 'bulans', 'pics'));
+    })->name('home');
 
-//daftar tugas berdasarkan kategori
-Route::get('/kategorikerja/{category:category_name}', function(CategoryTugas $category) {
+    Route::get('/daftarkerja', [TugasController::class, 'tampil'])->name('daftarkerja');
 
-    return view('kategoriKerja.katKerja',[
-        'tugas' => $category->tugas,
-        'category' => $category
-    ]);
+    Route::get('/daftartugas/{bulan:nama_bulan}', [TugasController::class, 'show']);
+
+    Route::post('/daftartugas/add', [TugasController::class, 'add'])->name('daftartugas.add');
+
+    Route::get('/kategorikerja/{category:category_name}', function (CategoryTugas $category) {
+        return view('kategoriKerja.katKerja', [
+            'tugas' => $category->tugas,
+            'category' => $category
+        ]);
+    });
+
+    Route::get('/daftartugas/delete/{tugas:id}', [TugasController::class, 'delete']);
+
+    Route::post('/daftartugas/edit/{tugas:id}', [TugasController::class, 'edit']);
+
+    Route::get('/daftartkjp', [TkjpController::class, 'show'])->name('daftartkjp');
+
+    Route::post('/daftartkjp/add', [TkjpController::class, 'add'])->name('daftartkjp.add');
+
+    Route::get('/daftartkjp/delete/{user:email}', [TkjpController::class, 'delete'])->name('daftartkjp.delete');
+
+    Route::post('/daftartkjp/edit/{user:id}', [TkjpController::class, 'edit']);
 });
-
-//mengahpus daftar tugas
-Route::get('/daftartugas/delete/{tugas:id}', [TugasController::class, 'delete']);
-
-//edit daftar tugas
-Route::post('/daftartugas/edit/{tugas:id}', [TugasController::class, 'edit']);
-
-Route::get('/daftartkjp', [TkjpController::class, 'show'])->name('daftartkjp');
-
-// menambahkan data 
-Route::post('/daftartkjp/add', [TkjpController::class, 'add'])->name('daftartkjp.add');
-//menghapus data
-Route::get('/daftartkjp/delete/{user:email}', [TkjpController::class, 'delete'])->name('daftartkjp.delete');

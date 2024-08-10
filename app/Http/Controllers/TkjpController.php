@@ -27,7 +27,7 @@ class TkjpController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'image' => 'required|mimes:png,jpg,jpeg,jfif|max:2046',
+            'image' => 'required|mimes:png,jpg,jpeg,jfif',
             'password' => 'required|string|min:8|',
             'bagian' => 'required|string|max:255',
             'role_id' => 'required|integer',
@@ -63,5 +63,13 @@ class TkjpController extends Controller
         $user->delete();
     
         return redirect()->route('daftartkjp')->with('danger', 'data berhasil dihapus');
+    }
+
+    public function edit(Request $request, $user) {
+
+        dd($user);
+        // $user->update($request->all());
+
+        // return redirect()->route('daftartkjp')->with('success', 'data berhasil diUpdate');
     }
 }

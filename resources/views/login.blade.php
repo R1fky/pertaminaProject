@@ -54,8 +54,14 @@
 
 <body>
     <div class="login-form">
-        <h2>Login</h2>
-        @if ($errors->any())
+        <img src="{{ asset('img/logo.png') }}" alt=""
+            style="width: 150px; height: 150px; display: block; margin: 0 auto;">
+        @if (Session::has('error'))
+            <div class="alert alert-danger">
+                {{ Session::get('error') }}
+            </div>
+        @endif
+        {{-- @if ($errors->any())
             <ul>
                 @foreach ($errors->all() as $item)
                     <div class="alert alert-danger">
@@ -63,8 +69,8 @@
                     </div>
                 @endforeach
             </ul>
-        @endif
-        <form action="" method="post">
+        @endif --}}
+        <form action="login" method="POST">
             @csrf
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
@@ -81,10 +87,6 @@
                 @error('password')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
-            </div>
-            <div class="form-group">
-                <input type="checkbox" id="remember" class="form-check-input">
-                <label for="remember">Remember me</label>
             </div>
             <button type="submit" class="btn-login">Login</button>
             <p>Don't have an account? <a href="#">Sign up</a></p>

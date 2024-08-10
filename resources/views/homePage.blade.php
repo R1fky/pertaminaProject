@@ -1,4 +1,11 @@
 <x-layouts>
+    <!-- Modal Structure -->
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <!-- Carousel -->
     <div id="carousel" class="carousel slide" data-bs-ride="carousel">
         <!-- Carousel inner -->
@@ -9,13 +16,15 @@
                     <div class="container">
                         <div class="row align-items-center">
                             <div class="col-lg-6 col-md-12 col-sm-12">
-                                <h2 style="margin-top: 20px;" class="mt-4-md text-lg fs-4">Selamat Datang</h2>
-                                <p class="text-lg fs-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit
-                                    amet nulla auctor, vestibulum magna sed, convallis ex.</p>
+                                <h2 style="margin-top: 20px;" class="mt-4-md text-lg fs-4">
+                                    Selamat Datang
+                                    <span style="color: #F9E400; font-weight: bold">{{ auth()->user()->name }}</span>
+                                </h2>
+                                <p class="text-lg fs-6"></p>
                             </div>
                             <div class="col-lg-6 col-md-12 col-sm-12 text-center">
-                                <img src="/img/profill.png" alt="Image" class="img-fluid img-md-50"
-                                    style="max-width: 60%; height: auto;">
+                                <img src="{{ asset('storage/images/' . auth()->user()->image) }}" alt="Image"
+                                    class="img-fluid img-md-50" style="max-width: 40%; height: auto;">
                             </div>
                         </div>
                     </div>
@@ -80,4 +89,5 @@
         </div>
     </div>
     {{-- end jadwal kerja --}}
+
 </x-layouts>

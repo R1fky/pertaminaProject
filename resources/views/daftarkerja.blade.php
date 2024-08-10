@@ -337,7 +337,8 @@
                                             <label for="category_id" class="form-label">Category</label>
                                             <select class="form-select @error('category_id') is-invalid @enderror"
                                                 aria-label="Default select example" name="category_id">
-                                                <option selected value="{{ $tugas->category->id }}" >{{ $tugas->category->category_name }}</option>
+                                                <option selected value="{{ $tugas->category->id }}">
+                                                    {{ $tugas->category->category_name }}</option>
                                                 @foreach ($categorys as $category)
                                                     <option value="{{ $category->id }}">
                                                         {{ $category->category_name }}
@@ -357,7 +358,8 @@
                                         <label for="pic_id" class="form-label">PIC</label>
                                         <select class="form-select @error('pic_id') is-invalid @enderror"
                                             aria-label="Default select example" name="pic_id">
-                                            <option selected value="{{ $tugas->pic->id }}">{{ $tugas->pic->name_pic }}</option>
+                                            <option selected value="{{ $tugas->pic->id }}">
+                                                {{ $tugas->pic->name_pic }}</option>
                                             @foreach ($pics as $pic)
                                                 <option value="{{ $pic->id }}">{{ $pic->name_pic }}</option>
                                             @endforeach

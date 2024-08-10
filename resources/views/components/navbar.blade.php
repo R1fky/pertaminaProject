@@ -4,8 +4,8 @@
         <a class="navbar-brand" href="#" style="font-weight: bold;">Pertamina</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
-                    <a class="nav-link" href="/">Home</a>
+                <li class="nav-item {{ Request::is('home') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('home') }}">Home</a>
                 </li>
                 <li class="nav-item {{ Request::is('daftartkjp') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('daftartkjp') }}">Daftar TKJP</a>
@@ -20,7 +20,14 @@
                     </a>
                     <ul class="dropdown-menu mt-2 ">
                         <li><a class="dropdown-item" href="#">Profil</a></li>
-                        <li><a class="dropdown-item" href="#">Log- Out</a></li>
+                        <li>
+                            <form action="/logout" method="post">
+                                @csrf
+
+                                <button type="submit" class="dropdown-item px-3 border-0">Log- Out</button>
+                            </form>
+                        </li>
+                        {{-- <li><a class="dropdown-item" href="">Log- Out</a></li> --}}
                     </ul>
                 </li>
             </ul>
