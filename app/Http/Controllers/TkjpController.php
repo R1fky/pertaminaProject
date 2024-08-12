@@ -14,11 +14,13 @@ class TkjpController extends Controller
 {
     public function show()
     {
-        $users = User::all();
-        $roles = Role::all();
         return view(
             'dataTkjp',
-            compact('users', 'roles')
+            [
+                'users' => User::all(),
+                'roles' => Role::all(),
+                'title' => 'Daftar TKJP'
+            ]
         );
     }
 
@@ -37,10 +39,10 @@ class TkjpController extends Controller
 
 
         $image = $request->file('image');
-        $filename = date('Y-m-d').$image->getClientOriginalName();
-        $path = 'images/'.$filename;
-        Storage::disk('public')->put($path,file_get_contents($image));
-        
+        $filename = date('Y-m-d') . $image->getClientOriginalName();
+        $path = 'images/' . $filename;
+        Storage::disk('public')->put($path, file_get_contents($image));
+
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
@@ -59,13 +61,15 @@ class TkjpController extends Controller
     }
 
     //delete
-    public function delete(User $user) {
+    public function delete(User $user)
+    {
         $user->delete();
-    
+
         return redirect()->route('daftartkjp')->with('danger', 'data berhasil dihapus');
     }
 
-    public function edit(Request $request, $user) {
+    public function edit(Request $request, $user)
+    {
 
         dd($user);
         // $user->update($request->all());

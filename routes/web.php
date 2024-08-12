@@ -9,6 +9,7 @@ use App\Http\Controllers\TkjpController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TugasController;
 use App\Models\PicCategory;
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 
@@ -27,7 +28,13 @@ Route::group(['middleware' => 'auth'], function () {
         $categorys = CategoryTugas::all();
         $pics = PicCategory::all();
         $bulans = Bulan::all();
-        return view('homePage', compact('categorys', 'bulans', 'pics'));
+        return view('homePage', [
+            'title' => 'Home',
+            'categorys' => CategoryTugas::all(),
+            'pics' => PicCategory::all(),
+            'bulans' => Bulan::all(),
+            'title' => 'Home'
+        ]);
     })->name('home');
 
     Route::get('/daftarkerja', [TugasController::class, 'tampil'])->name('daftarkerja');
@@ -39,7 +46,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/kategorikerja/{category:category_name}', function (CategoryTugas $category) {
         return view('kategoriKerja.katKerja', [
             'tugas' => $category->tugas,
-            'category' => $category
+            'category' => $category,
+            'title' => 'Category Kerja'
+        ]);
+    });
+
+    //update tugas kerja
+    Route::get('/updatetugas/{tugas:id}', function () {
+        return view('kategoriKerja.updateKerja', [
+            'title' => 'Update Tugas Kerja',
+            'tugass' => Tugas::all(),
         ]);
     });
 

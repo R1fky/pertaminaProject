@@ -1,4 +1,5 @@
 <x-layouts>
+    <x-slot:title>{{ $title }}</x-slot:title>
     <div class="container">
         <h1 class="mt-5 mb-4">Daftar Tugas Kerja HSSE</h1>
         @if (Session::has('success'))

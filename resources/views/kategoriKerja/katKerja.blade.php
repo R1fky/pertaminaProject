@@ -1,4 +1,5 @@
 <x-layouts>
+    <x-slot:title>{{ $title }}</x-slot:title>
     <div class="container mt-5">
         <h1 class="mt-5 mb-4">Daftar Tugas Kerja {{ $category->category_name }}</h1>
         <table class="table table-stripedmt mt-5">
@@ -29,8 +30,10 @@
                                     data-bs-target="#infoTugas{{ $tgs->id }}">
                                     <i class="bi bi-info-lg"></i>
                                 </button>
-                                <a href="" class="btn btn-warning btn-sm me-2"><i
-                                        class="bi bi-pencil-square"></i></a>
+                                <button type="button" class="btn btn-warning btn-sm me-2" data-bs-toggle="modal"
+                                    data-bs-target="#editTugas{{ $tgs->id }}">
+                                    <i class="bi bi-pen"></i>
+                                </button>
                             </div>
                         </td>
                     </tr>
@@ -64,7 +67,8 @@
                                 <div class="col-md-6">
                                     <label for="bulan" class="form-label">Bulan</label>
                                     <input class="form-control" type="text" placeholder="Disabled input"
-                                        aria-label="Disabled input example" value="{{ $tgs->bulan->nama_bulan }}" disabled>
+                                        aria-label="Disabled input example" value="{{ $tgs->bulan->nama_bulan }}"
+                                        disabled>
                                 </div>
                             </div>
                             <div class="row mt-3">
@@ -100,5 +104,33 @@
             </div>
         @endforeach
         {{-- end modal --}}
+
+
+        {{-- Modal edit Tugas --}}
+        @foreach ($tugas as $tgs)
+            <div class="modal fade" id="editTugas{{ $tgs->id }}" tabindex="-1"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Tugas </h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                                Apakah Anda ingin Update Progress
+                                <span style="color: #021526; font-weight: bold">{{ $tgs->nama_tugas }}</span>
+
+                                <div class="modal-footer mt-3">
+                                    <a href="/updatetugas/{{ $tgs->id }}" class="btn btn-warning">Edit</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    @endforeach
+    {{-- End Modal Edit Tugas --}}
     </div>
 </x-layouts>

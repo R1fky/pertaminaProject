@@ -14,24 +14,28 @@ use League\CommonMark\Node\Block\Document;
 class TugasController extends Controller
 {
 
-    public function tampil() {
+    public function tampil()
+    {
         return view('daftarkerja', [
             'tugass' => Tugas::all(),
             'bulans' => Bulan::all(),
             'pics' => PicCategory::all(),
             'categorys' => CategoryTugas::all(),
+            'title' => 'daftarkerja'
         ]);
     }
 
     public function show(Bulan $bulan)
     {
-        $tugass = $bulan->tugas;
-        $categorys = CategoryTugas::all();
-        $pics = PicCategory::all();
-        $bulans = Bulan::all();
         return view(
-            'kalenderKerja', 
-            compact('tugass', 'categorys', 'pics', 'bulans')
+            'kalenderKerja',
+            [
+                'tugass' => $bulan->tugas,
+                'categorys' => CategoryTugas::all(),
+                'pics' => PicCategory::all(),
+                'bulans' => Bulan::all(),
+                'title' => 'Daftar Kerja Bulan'
+            ]
         );
     }
 
@@ -62,17 +66,21 @@ class TugasController extends Controller
         }
     }
 
-    public function delete(Tugas $tugas) {
+    public function delete(Tugas $tugas)
+    {
         $tugas->delete();
 
         return redirect()->route('daftarkerja')->with('danger', 'Data Berhasil Dihapus');
     }
 
-    public function edit(Request $request, Tugas $tugas) {
+    public function edit(Request $request, Tugas $tugas)
+    {
 
         $tugas->update($request->all());
 
         return redirect()->route('daftarkerja')->with('success', 'Data Berhasil Diedit');
     }
-    
+
+    //untuk menambahkan kinerja progres tugas
+
 }

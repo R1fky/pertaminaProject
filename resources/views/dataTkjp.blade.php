@@ -1,4 +1,5 @@
 <x-layouts>
+    <x-slot:title>{{ $title }}</x-slot:title>
     <div class="container">
         @if (Session::has('success'))
             <div class="alert alert-success mt-3">

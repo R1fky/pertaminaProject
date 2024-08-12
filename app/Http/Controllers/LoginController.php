@@ -28,10 +28,6 @@ class LoginController extends Controller
 
         Session::flash('error', 'Username dan Password tidak terdaftar');
         return back();
-
-        // return back()->withErrors(['username' => 'Username dan Password tidak terdaftar']);
-        // return back()->with('errors', 'Username dan Password tidak terdaftar');
-        // After successful login
     }
 
     public function logout()

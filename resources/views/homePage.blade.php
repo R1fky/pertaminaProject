@@ -1,8 +1,16 @@
 <x-layouts>
-    <!-- Modal Structure -->
+    <x-slot:title>{{ $title }}</x-slot:title>
     @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
+        <div class="alert" role="alert"
+            style="width: 400px; margin: 40px auto; border: 1px solid #ddd; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+            <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"
+                style="position: absolute; top: 10px; right: 10px;">
+            </button>
+            <div class="card-body">
+                <h5 class="card-title">{{ session('success') }}!</h5>
+                <p class="card-text"><span style="color: #F9E400; font-weight: bold">{{ auth()->user()->name }}</span>
+                </p>
+            </div>
         </div>
     @endif
 
@@ -89,5 +97,4 @@
         </div>
     </div>
     {{-- end jadwal kerja --}}
-
 </x-layouts>
