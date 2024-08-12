@@ -9,6 +9,7 @@
                     <th scope="col">Nama Tugas</th>
                     <th scope="col">Frekuensi</th>
                     <th scope="col">Bulan</th>
+                    <th scope="col">Document</th>
                     <th scope="col">PIC</th>
                     <th scope="col">Status</th>
                     <th scope="col" class="text-center">Aksi</th>
@@ -21,6 +22,7 @@
                         <td>{{ $tgs->nama_tugas }}</td>
                         <td>{{ $tgs->frekuensi }}</td>
                         <td>{{ $tgs->bulan->nama_bulan }}</td>
+                        <td>{{ $tgs->bulan->document }}</td>
                         <td>{{ $tgs->pic->name_pic }}</td>
                         <td>{{ $tgs->status }}</td>
                         <td class="text-center">
@@ -122,7 +124,7 @@
                                 <span style="color: #021526; font-weight: bold">{{ $tgs->nama_tugas }}</span>
 
                                 <div class="modal-footer mt-3">
-                                    <a href="/updatetugas/{{ $tgs->id }}" class="btn btn-warning">Edit</a>
+                                    <a href="/updatetugas/{{ $tgs->id }}" class="btn btn-warning">Iya</a>
                                 </div>
                             </form>
                         </div>

@@ -51,13 +51,15 @@ Route::group(['middleware' => 'auth'], function () {
         ]);
     });
 
-    //update tugas kerja
-    Route::get('/updatetugas/{tugas:id}', function () {
+    //form update tugas kerja
+    Route::get('/updatetugas/{tugas:id}', function (Tugas $tugas) {
         return view('kategoriKerja.updateKerja', [
             'title' => 'Update Tugas Kerja',
-            'tugass' => Tugas::all(),
+            'tugas' => $tugas
         ]);
     });
+    //update progres
+    Route::post('/updateprogres/update/{tugas:id}',[TugasController::class, 'update']);
 
     Route::get('/daftartugas/delete/{tugas:id}', [TugasController::class, 'delete']);
 

@@ -68,12 +68,11 @@ class TkjpController extends Controller
         return redirect()->route('daftartkjp')->with('danger', 'data berhasil dihapus');
     }
 
-    public function edit(Request $request, $user)
+    public function edit(Request $request, User $user)
     {
 
-        dd($user);
-        // $user->update($request->all());
+        $user->update($request->all());
 
-        // return redirect()->route('daftartkjp')->with('success', 'data berhasil diUpdate');
+        return redirect()->route('daftartkjp')->with('success', 'data berhasil diUpdate');
     }
 }

@@ -16,9 +16,11 @@ class Tugas extends Model
         'deskripsi',
         'frekuensi',
         'pic_id',
-        'bulan',
         'category_id',
-        'status'
+        'status',
+        'bulan_id',
+        'document'
+
     ];
     public function category():BelongsTo {
         return $this->belongsTo(CategoryTugas::class);

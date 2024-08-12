@@ -217,16 +217,9 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <button type="button" class="btn btn-warning"
+                                                    <button type="submit" class="btn btn-warning"
                                                         data-bs-dismiss="modal">Edit</button>
                                                 </form>
-                                                {{-- <div class="modal-footer mt-3">
-                            <div class="col-md-4">
-                                <img src="{{ asset('storage/images/' . $user->image) }}"
-                                    class="img-fluid rounded"
-                                    style="width: 100%; height: 150px; object-fit: cover;" alt="...">
-                            </div>
-                        </div> --}}
                                                 {{-- end form validate  --}}
                                             </div>
                                         </div>

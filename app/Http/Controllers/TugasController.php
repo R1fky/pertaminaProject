@@ -82,5 +82,22 @@ class TugasController extends Controller
     }
 
     //untuk menambahkan kinerja progres tugas
+    public function update(Request $request, Tugas $tugas)
+    {
+        $request->validate([
+            'pdf_file' => 'required|mimes:pdf|max:10240',
+        ]);
 
+        $pdf_file = $request->file('pdf_file');
+        $filename = date('Y-m-d') . $pdf_file->getClientOriginalName();
+        $path = 'document/' . $filename;
+
+        Storage::disk('public')->put($path, file_get_contents($pdf_file));
+
+        $tugas->document = $request->filename;
+
+
+        $tugas->update($request->only(['status', 'deskripsi']));
+        return redirect('/');
+    }
 }
