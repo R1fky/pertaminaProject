@@ -94,10 +94,15 @@ class TugasController extends Controller
 
         Storage::disk('public')->put($path, file_get_contents($pdf_file));
 
-        $tugas->document = $request->filename;
+        $tugas->document = $filename;
 
 
-        $tugas->update($request->only(['status', 'deskripsi']));
-        return redirect('/');
+        // $tugas->update($request->only('deskripsi']));
+        $tugas->update([
+            $tugas->status = 'progress',
+            $tugas->deskripsi = $request->deskripsi
+        ]);
+        $tugas->save(); 
+        return redirect('home')->with('success', 'Berhasil Upload Progres Tugas');
     }
 }

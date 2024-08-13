@@ -157,16 +157,6 @@
                                     @enderror
                                 </div>
                             </div>
-                            {{-- <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="status" class="form-label">Status</label>
-                                    <input type="text" class="form-control @error('status') is-invalid @enderror"
-                                        id="status" name="status" value="{{ old('status') }}">
-                                    @error('status')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div> --}}
                         </div>
                         <div class="mb-3">
                             <label for="deskripsi" class="form-label">Deskripsi</label>
@@ -260,6 +250,12 @@
                                 <label for="deskripsi" class="form-label">Deskripsi</label>
                                 <textarea class="form-control" rows="2" disabled>{{ $tugas->deskripsi }}</textarea>
                             </div>
+                        </div>
+                        <div class="col">
+                            <label for="deskripsi" class="form-label">Document</label>
+                            <input class="form-control" type="text" readonly value="{{ $tugas->document }}" disabled/>
+                            <a href="{{ asset('storage/document/' . $tugas->document) }}" target="_blank">View
+                                Document</a>
                         </div>
                     </div>
                     <div class="modal-footer">

@@ -60,7 +60,7 @@ Route::group(['middleware' => 'auth'], function () {
     });
     //update progres
     Route::post('/updateprogres/update/{tugas:id}',[TugasController::class, 'update']);
-
+    //delete tugas
     Route::get('/daftartugas/delete/{tugas:id}', [TugasController::class, 'delete']);
 
     Route::post('/daftartugas/edit/{tugas:id}', [TugasController::class, 'edit']);

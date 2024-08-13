@@ -36,7 +36,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="status" class="form-label">Status</label>
-                    <input class="form-control" type="text" aria-label="input example" name="status" value="{{ $tugas->status }}">
+                    <input class="form-control" type="text" aria-label="input example" name="status" value="{{ $tugas->status }}" disabled>
                 </div>
             </div>
             <div class="col-md-6">
