@@ -253,12 +253,37 @@
                         </div>
                         <div class="col">
                             <label for="deskripsi" class="form-label">Document</label>
-                            <input class="form-control" type="text" readonly value="{{ $tugas->document }}" disabled/>
-                            <a href="{{ asset('storage/document/' . $tugas->document) }}" target="_blank">View
-                                Document</a>
+                            <input class="form-control" type="text" readonly value="{{ $tugas->document }}"
+                                disabled />
+                            @if ($tugas->document)
+                                <a href="{{ asset('storage/document/' . $tugas->document) }}" target="_blank">View
+                                    Document</a>
+                            @else
+                                <span style="color: #FF0000; font-weight: bold">belum ada document</span>
+                            @endif
                         </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                @foreach ($users as $user)
+                                    @if ($tugas->user_id == $user->id)
+                                        <p class="card-text">Upload By : <span
+                                                style="color: #373A40; font-weight: bold">{{ $user->name }}</span>
+                                    @endif
+                                @endforeach
+
+                            </div>
+                        </div>
+
                     </div>
                     <div class="modal-footer">
+                        <form action="/updateprogres/terima/{{ $tugas->id }}" method="POST">
+                            @csrf
+                            @if ($tugas->status === 'Approve')
+                                <button type="submit" class="btn btn-success" disabled>Terima</button>
+                            @else
+                                <button type="submit" class="btn btn-success">Terima</button>
+                            @endif
+                        </form>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
@@ -366,16 +391,6 @@
                                         @enderror
                                     </div>
                                 </div>
-                                {{-- <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="status" class="form-label">Status</label>
-                                    <input type="text" class="form-control @error('status') is-invalid @enderror"
-                                        id="status" name="status" value="{{ old('status') }}">
-                                    @error('status')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div> --}}
                             </div>
                             <div class="mb-3">
                                 <label for="deskripsi" class="form-label">Deskripsi</label>

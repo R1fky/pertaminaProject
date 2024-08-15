@@ -36,12 +36,19 @@
                 </div>
                 <div class="col-md-6">
                     <label for="status" class="form-label">Status</label>
-                    <input class="form-control" type="text" aria-label="input example" name="status" value="{{ $tugas->status }}" disabled>
+                    <input class="form-control" type="text" aria-label="input example" name="status"
+                        value="{{ $tugas->status }}" disabled>
                 </div>
             </div>
-            <div class="col-md-6">
-                <label for="deskripsi" class="form-label">Deskripsi</label>
-                <textarea class="form-control" name="deskripsi" rows="4">{{ $tugas->deskripsi }}</textarea>
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <label for="deskripsi" class="form-label">Deskripsi</label>
+                    <textarea class="form-control" name="deskripsi" rows="4">{{ $tugas->deskripsi }}</textarea>
+                </div>
+                <div class="col-md-6">
+                    <input class="form-control" type="hidden" aria-label="input example" name="user_id"
+                        value="{{ auth()->user()->id }}">
+                </div>
             </div>
             <div class="text-end">
                 <button type="submit" class="btn btn-warning">Update</button>

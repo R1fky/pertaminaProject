@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Bulan;
 use App\Models\Tugas;
 use App\Models\PicCategory;
@@ -21,6 +22,7 @@ class TugasController extends Controller
             'bulans' => Bulan::all(),
             'pics' => PicCategory::all(),
             'categorys' => CategoryTugas::all(),
+            'users' => User::all(),
             'title' => 'daftarkerja'
         ]);
     }
@@ -34,6 +36,7 @@ class TugasController extends Controller
                 'categorys' => CategoryTugas::all(),
                 'pics' => PicCategory::all(),
                 'bulans' => Bulan::all(),
+                'users' => User::all(),
                 'title' => 'Daftar Kerja Bulan'
             ]
         );
@@ -56,6 +59,7 @@ class TugasController extends Controller
         $tugas->category_id = $request->category_id;
         $tugas->pic_id = $request->pic_id;
         $tugas->status = 'belum';
+
         $tugas->deskripsi = $request->deskripsi;
 
         $tugas->save();
@@ -86,6 +90,7 @@ class TugasController extends Controller
     {
         $request->validate([
             'pdf_file' => 'required|mimes:pdf|max:10240',
+
         ]);
 
         $pdf_file = $request->file('pdf_file');
@@ -97,12 +102,18 @@ class TugasController extends Controller
         $tugas->document = $filename;
 
 
-        // $tugas->update($request->only('deskripsi']));
         $tugas->update([
             $tugas->status = 'progress',
-            $tugas->deskripsi = $request->deskripsi
+            $tugas->deskripsi = $request->deskripsi,
+            $tugas->user_id = $request->user_id
         ]);
         $tugas->save(); 
         return redirect('home')->with('success', 'Berhasil Upload Progres Tugas');
+    }
+
+    public function upTerima(Tugas $tugas) {
+        $tugas->update([$tugas->status = 'Approve']);
+
+        return redirect('daftarkerja')->with('success', 'Pekerjaan di Approve');
     }
 }

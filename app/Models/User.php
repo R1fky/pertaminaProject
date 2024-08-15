@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -61,5 +62,10 @@ class User extends Authenticatable
     public function hasRole($role)
     {
         return in_array($role, $this->roles->pluck('name')->toArray());
+    }
+
+    public function tugas(): HasMany
+    {
+        return $this->hasMany(Tugas::class, 'user_id');
     }
 }

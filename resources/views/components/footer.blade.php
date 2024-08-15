@@ -5,7 +5,7 @@
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <h5>About Us</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#" style="color: #fff;">Our Story</a></li>
+                    <li><a href="https://pertaminapatraniaga.com/sejarah" style="color: #fff;">Our Story</a></li>
                     <li><a href="#" style="color: #fff;">Our Team</a></li>
                     <li><a href="#" style="color: #fff;">Contact Us</a></li>
                 </ul>
@@ -40,7 +40,7 @@
         </div>
         <div class="row">
             <div class="col-md-12 text-center">
-                <p>&copy; 2023 Your Company Name. All rights reserved.</p>
+                <p>&copy; 2024 Pertamina Patra Niaga Integrated Lhokseumawe</p>
             </div>
         </div>
     </div>

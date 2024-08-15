@@ -1,16 +1,18 @@
 <?php
 
+use App\Models\User;
 use App\Models\Bulan;
 use App\Models\Tugas;
+use GuzzleHttp\Middleware;
+use App\Models\PicCategory;
 use App\Models\CategoryTugas;
 use Illuminate\Auth\Events\Login;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Routing\RouteRegistrar;
 use App\Http\Controllers\TkjpController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TugasController;
-use App\Models\PicCategory;
-use GuzzleHttp\Middleware;
-use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 
 Route::get('/', function () {
@@ -25,9 +27,6 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::group(['middleware' => 'auth'], function () {
     // Routes that require authentication
     Route::get('/home', function () {
-        $categorys = CategoryTugas::all();
-        $pics = PicCategory::all();
-        $bulans = Bulan::all();
         return view('homePage', [
             'title' => 'Home',
             'categorys' => CategoryTugas::all(),
@@ -47,7 +46,8 @@ Route::group(['middleware' => 'auth'], function () {
         return view('kategoriKerja.katKerja', [
             'tugas' => $category->tugas,
             'category' => $category,
-            'title' => 'Category Kerja'
+            'title' => 'Category Kerja',
+            'users' => User::all(),
         ]);
     });
 
@@ -60,6 +60,9 @@ Route::group(['middleware' => 'auth'], function () {
     });
     //update progres
     Route::post('/updateprogres/update/{tugas:id}',[TugasController::class, 'update']);
+
+    //update progres terima belum sempurna
+    Route::post('/updateprogres/terima/{tugas:id}', [TugasController::class, 'upTerima']);
     //delete tugas
     Route::get('/daftartugas/delete/{tugas:id}', [TugasController::class, 'delete']);
 

@@ -1,9 +1,9 @@
 <x-layouts>
     <x-slot:title>{{ $title }}</x-slot:title>
     @if (session('success'))
-    <div class="alert alert-success">
-        {{ $session('success') }}
-    </div>
+        <div class="alert alert-success">
+            {{ $session('success') }}
+        </div>
     @endif
     <div class="container mt-5">
         <h1 class="mt-5 mb-4">Daftar Tugas Kerja {{ $category->category_name }}</h1>
@@ -29,7 +29,10 @@
                         <td>{{ $tgs->bulan->nama_bulan }}</td>
                         <td>
                             @if ($tgs->document)
-                                <a href="{{ asset('storage/document/' . $tgs->document) }}" target="_blank">{{ $tgs->document }}</a>
+                                <a href="{{ asset('storage/document/' . $tgs->document) }}"
+                                    target="_blank">{{ $tgs->document }}</a>
+                            @else
+                                <span style="color: #FF0000; font-weight: bold">belum ada document</span>
                             @endif
                         </td>
                         <td>{{ $tgs->pic->name_pic }}</td>
@@ -108,12 +111,29 @@
                             </div>
                             <div class="col">
                                 <label for="deskripsi" class="form-label">Document</label>
-                                <input class="form-control" type="text" readonly value="{{ $tgs->document }}" disabled/>
-                                <a href="{{ asset('storage/document/' . $tgs->document) }}" target="_blank">View
-                                    Document</a>
+                                <input class="form-control" type="text" readonly value="{{ $tgs->document }}"
+                                    disabled />
+                                @if ($tgs->document)
+                                    <a href="{{ asset('storage/document/' . $tgs->document) }}" target="_blank">View
+                                        Document</a>
+                                @else
+                                    <span style="color: #FF0000; font-weight: bold">belum ada document</span>
+                                @endif
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col">
+                                    @foreach ($users as $user)
+                                        @if ($tgs->user_id == $user->id)
+                                            <p class="card-text">Upload By : <span
+                                                    style="color: #373A40; font-weight: bold">{{ $user->name }}</span>
+                                        @endif
+                                    @endforeach
+
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">
+                            <button type="button" class="btn btn-success">Terima</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
                     </div>
@@ -146,8 +166,8 @@
                     </div>
                 </div>
             </div>
+        @endforeach
     </div>
-    @endforeach
     {{-- End Modal Edit Tugas --}}
     </div>
 </x-layouts>

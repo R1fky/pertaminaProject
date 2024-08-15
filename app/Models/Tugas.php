@@ -19,7 +19,8 @@ class Tugas extends Model
         'category_id',
         'status',
         'bulan_id',
-        'document'
+        'document',
+        'user_id'
 
     ];
     public function category():BelongsTo {
@@ -32,5 +33,9 @@ class Tugas extends Model
 
     public function bulan():BelongsTo {
         return $this->belongsTo(Bulan::class);
+    }
+
+    public function user():BelongsTo {
+        return $this->belongsTo(User::class);
     }
 }
