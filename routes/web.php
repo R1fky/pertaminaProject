@@ -36,6 +36,10 @@ Route::group(['middleware' => 'auth'], function () {
         ]);
     })->name('home');
 
+    //profil
+    Route::get('/profil', [TkjpController::class, 'profilShow']);
+    // Roure::get('/updateProfil/{user:id}', [TkjpController::class, '']);
+
     Route::get('/daftarkerja', [TugasController::class, 'tampil'])->name('daftarkerja');
 
     Route::get('/daftartugas/{bulan:nama_bulan}', [TugasController::class, 'show']);
@@ -59,7 +63,7 @@ Route::group(['middleware' => 'auth'], function () {
         ]);
     });
     //update progres
-    Route::post('/updateprogres/update/{tugas:id}',[TugasController::class, 'update']);
+    Route::post('/updateprogres/update/{tugas:id}', [TugasController::class, 'update']);
 
     //update progres terima belum sempurna
     Route::post('/updateprogres/terima/{tugas:id}', [TugasController::class, 'upTerima']);

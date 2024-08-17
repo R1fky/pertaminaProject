@@ -19,7 +19,7 @@
                         Login
                     </a>
                     <ul class="dropdown-menu mt-2 ">
-                        <li><a class="dropdown-item" href="#">Profil</a></li>
+                        <li><a class="dropdown-item" href="/profil">Profil</a></li>
                         <li>
                             <form action="/logout" method="post">
                                 @csrf

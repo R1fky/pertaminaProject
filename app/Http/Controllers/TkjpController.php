@@ -75,4 +75,11 @@ class TkjpController extends Controller
 
         return redirect()->route('daftartkjp')->with('success', 'data berhasil diUpdate');
     }
+    
+    //membuat halaman profil
+    public function profilShow() {
+        return view('profile', [
+            'title' => 'profil ',
+        ]);
+    }
 }
