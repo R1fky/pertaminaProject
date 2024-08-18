@@ -1,9 +1,16 @@
 <x-layouts>
     <x-slot:title>{{ $title . auth()->user()->name }}</x-slot:title>
     <div class="container mt-3">
+        @if (session('success'))
+            <div class="alert alert-success">
+                <button type="button" class="btn-close" aria-label="Close"></button>
+                {{ session('success') }}
+            </div>
+        @endif
+
         <div class="row">
             <div class="col-md-12">
-                <h1>Profile Page {{ auth()->user()->name }}</h1>
+                <h1>Profile {{ auth()->user()->name }}</h1>
             </div>
         </div>
         <div class="row mt-3">
@@ -18,16 +25,24 @@
                         <h5 class="card-title">{{ auth()->user()->name }}</h5>
                         <h6 class="card-subtitle mb-2 text-body-secondary">{{ auth()->user()->email }}</h6>
                         <h6 class="card-subtitle mb-5 text-body-secondary">
-                            <b>Joined :</b>
+                            <b>Akun ini dibuat pada :</b>
                             <span style="float: right;">{{ auth()->user()->created_at->format('d-M-Y') }}</span>
                         </h6>
                         <div class="d-flex justify-content-center mb-3">
-                            <a href="/updateProfil/{{ auth()->user()->id }}" class="btn btn-outline-danger me-2" style="min-width: 150px;"><i
-                                    class="bi bi-shield-lock-fill"></i>
+                            <a href="/updateProfil/{{ auth()->user()->email }}" class="btn btn-outline-danger me-2"
+                                style="min-width: 150px;"><i class="bi bi-shield-lock-fill"></i>
                                 Privacy</a>
-                            <a href="#" class="btn btn-outline-success me-2" style="min-width: 150px;"><i
-                                    class="bi bi-menu-down"></i> Other
-                                Menu</a>
+                            <div class="dropdown">
+                                <a href="#" class="btn btn-outline-success dropdown-toggle me-2"
+                                    style="min-width: 150px;" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-menu-down"></i> Other Menu
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Daftar Tugas Compeleted</a></li>
+                                    <li><a class="dropdown-item" href="#">Daftar Tugas Aproval</a></li>
+                                    <li><a class="dropdown-item" href="#">Daftar Tugas Progress</a></li>
+                                </ul>
+                            </div>
                             <a href="#" class="btn btn-outline-info me-2" style="min-width: 150px;"><i
                                     class="bi bi-file-earmark-person"></i>
                                 About</a>

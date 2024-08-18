@@ -75,11 +75,54 @@ class TkjpController extends Controller
 
         return redirect()->route('daftartkjp')->with('success', 'data berhasil diUpdate');
     }
-    
+
     //membuat halaman profil
-    public function profilShow() {
+    public function profilShow()
+    {
         return view('profile', [
             'title' => 'profil ',
         ]);
+    }
+
+    public function updateProfil(User $user)
+    {
+
+        return view('profil.ubahUser', [
+            'title' => 'ubah profil',
+            'user' => $user
+        ]);
+    }
+
+    public function updateEmail(Request $request, User $user)
+    {
+        $request->validate([
+            'email' => 'required|string|email|max:255|unique:users',
+        ]);
+
+        $user->update([
+            $user->email = $request->email,
+        ]);
+        $user->save();
+        return redirect('/profil')->with('success', 'Email Anda Berhasil Di Ubah');
+    }
+
+    public function updatePassword(Request $request, User $user)
+    {
+        $request->validate([
+            'password' => 'required|string|min:8|',
+        ]);
+
+        $user->update([
+            $user->password = bcrypt($request->password)
+        ]);
+        $user->save();
+        return redirect('/profil')->with('success', 'Password Anda Berhasil Di Ubah');
+    }
+
+    public function deleteAccount(User $user)
+    {
+        $user->delete();
+
+        return redirect()->route('login');
     }
 }

@@ -89,7 +89,6 @@
                 @enderror
             </div>
             <button type="submit" class="btn-login">Login</button>
-            <p>Don't have an account? <a href="#">Sign up</a></p>
         </form>
     </div>
 </body>

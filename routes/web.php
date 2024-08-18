@@ -38,7 +38,13 @@ Route::group(['middleware' => 'auth'], function () {
 
     //profil
     Route::get('/profil', [TkjpController::class, 'profilShow']);
-    // Roure::get('/updateProfil/{user:id}', [TkjpController::class, '']);
+    //show form update profil
+    Route::get('/updateProfil/{user:email}', [TkjpController::class, 'updateProfil']);
+    //progress update profil
+    Route::post('/updateEmail/{user:email}', [TkjpController::class, 'updateEmail']);
+    Route::post('updatePassword/{user:email}', [TkjpController::class, 'updatePassword']);
+    Route::post('/deleteAccount/{user:id}', [TkjpController::class, 'deleteAccount']);
+    
 
     Route::get('/daftarkerja', [TugasController::class, 'tampil'])->name('daftarkerja');
 
