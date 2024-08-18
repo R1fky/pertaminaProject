@@ -1,5 +1,6 @@
 <x-layouts>
     <x-slot:title>{{ $title . auth()->user()->name }}</x-slot:title>
+
     <div class="container mt-3">
         @if (session('success'))
             <div class="alert alert-success">
@@ -17,6 +18,8 @@
             <div class="col-md-4">
                 <img src="{{ asset('storage/images/' . auth()->user()->image) }}" alt="Profile Picture"
                     class="img-fluid rounded-circle">
+
+
             </div>
 
             <div class="col-md-8">
@@ -38,9 +41,9 @@
                                     <i class="bi bi-menu-down"></i> Other Menu
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Daftar Tugas Compeleted</a></li>
-                                    <li><a class="dropdown-item" href="#">Daftar Tugas Aproval</a></li>
-                                    <li><a class="dropdown-item" href="#">Daftar Tugas Progress</a></li>
+                                    <li><a class="dropdown-item" href="/daftartugas/status/progress">Daftar Tugas Menunggu Review</a></li>
+                                    <li><a class="dropdown-item" href="/daftartugas/status/approve">Daftar Tugas Aproval</a></li>
+                                    <li><a class="dropdown-item" href="/daftartugas/status/completed">Daftar Tugas Compeleted</a></li>
                                 </ul>
                             </div>
                             <a href="#" class="btn btn-outline-info me-2" style="min-width: 150px;"><i

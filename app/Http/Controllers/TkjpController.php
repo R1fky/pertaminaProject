@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use App\Models\Tugas;
 use App\Models\User;
 
 use Illuminate\Http\Request;
@@ -80,7 +81,7 @@ class TkjpController extends Controller
     public function profilShow()
     {
         return view('profile', [
-            'title' => 'profil ',
+            'title' => 'profil',
         ]);
     }
 

@@ -44,8 +44,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/updateEmail/{user:email}', [TkjpController::class, 'updateEmail']);
     Route::post('updatePassword/{user:email}', [TkjpController::class, 'updatePassword']);
     Route::post('/deleteAccount/{user:id}', [TkjpController::class, 'deleteAccount']);
-    
 
+    //daftar kerja atau tugas 
     Route::get('/daftarkerja', [TugasController::class, 'tampil'])->name('daftarkerja');
 
     Route::get('/daftartugas/{bulan:nama_bulan}', [TugasController::class, 'show']);
@@ -78,6 +78,25 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/daftartugas/edit/{tugas:id}', [TugasController::class, 'edit']);
 
+    //menampilkan kerja atau tugas berdasarkan status
+    Route::get('daftartugas/status/progress', function() {
+        return view('kategoriKerja.daftarKerjaProgress', [
+            'title' => 'Status Kerja Progress',
+        ]);
+    });
+    Route::get('daftartugas/status/approve', function() {
+        return view('kategoriKerja.daftarKerjaApprove', [
+            'title' => 'Status Kerja Aprove',
+        ]);
+    });
+    Route::get('daftartugas/status/completed', function() {
+        return view('kategoriKerja.daftarKerjaCompleted', [
+            'title' => 'Status Kerja Compeleted',
+        ]);
+    });
+    // end 
+
+    //daftar pekerja atau tkjp
     Route::get('/daftartkjp', [TkjpController::class, 'show'])->name('daftartkjp');
 
     Route::post('/daftartkjp/add', [TkjpController::class, 'add'])->name('daftartkjp.add');
