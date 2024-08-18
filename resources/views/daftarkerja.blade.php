@@ -13,20 +13,29 @@
             </div>
         @endif
 
-        <!-- Button trigger modal -->
         <div class="d-flex align-items-center mb-4">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#tambahTugas">
+                <i class="bi bi-plus">Tambah tugas</i>
+            </button>
+
+            <form action="{{ route('daftarkerja') }}" method="GET" class="d-flex">
+                <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
+            </form>
+        </div>
+        {{-- <div class="d-flex align-items-center mb-4">
             <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#tambahTugas">
                 <i class="bi bi-plus">Tambah tugas</i>
             </button>
-            <select class="form-select form-select-sm ms-2" style="width: 110px;" aria-label="Default select example">
-                <option selected>Category</option>
-                @foreach ($categorys as $category)
-                    <option value="{{ $category->id }}">{{ $category->category_name }}</option>
-                @endforeach
-            </select>
-        </div>
-
+        </div> --}}
         <table class="table table-striped ">
+            @if (!empty($message))
+                <div class="alert alert-info">
+                    {{ $message }}
+                    <a href="{{ route('daftarkerja') }}"><i class="bi bi-skip-backward"></i> Kembali ke Daftar Kerja</a>
+                </div>
+            @endif  
             <thead>
                 <tr>
                     <th scope="col" class="text-center">No</th>
@@ -52,7 +61,8 @@
                         <td class="text-center">
                             <div class="btn-group" role="group">
                                 <button type="button" class="btn btn-info btn-sm me-2" data-bs-toggle="modal"
-                                    data-bs-target="#infoTugas{{ $tugas->id }}"><i class="bi bi-info-lg"></i> </i>
+                                    data-bs-target="#infoTugas{{ $tugas->id }}"><i class="bi bi-info-lg"></i>
+                                    </i>
                                 </button>
                                 <button type="button" class="btn btn-warning btn-sm me-2" data-bs-toggle="modal"
                                     data-bs-target="#editTugas{{ $tugas->id }}"><i class="bi bi-pencil-square"></i>

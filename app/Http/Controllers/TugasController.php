@@ -15,16 +15,44 @@ use League\CommonMark\Node\Block\Document;
 class TugasController extends Controller
 {
 
-    public function tampil()
+    public function tampil(Request $request)
     {
+        $search = $request->input('search');
+
+        $tugass = Tugas::when($search, function ($query) use ($search) {
+            $query->where('nama_tugas', 'like', "%{$search}%")
+                ->orWhere('deskripsi', 'like', "%{$search}%");
+        })->get();
+
+        $bulans = Bulan::all();
+        $pics = PicCategory::all();
+        $categorys = CategoryTugas::all();
+        $users = User::all();
+
+        if ($tugass->isEmpty()) {
+            $message = 'Tidak ada tugas yang ditemukan dengan kata kunci "' . $search . '"';
+        } else {
+            $message = '';
+        }
+
         return view('daftarkerja', [
-            'tugass' => Tugas::all(),
-            'bulans' => Bulan::all(),
-            'pics' => PicCategory::all(),
-            'categorys' => CategoryTugas::all(),
-            'users' => User::all(),
-            'title' => 'daftarkerja'
+            'tugass' => $tugass,
+            'bulans' => $bulans,
+            'pics' => $pics,
+            'categorys' => $categorys,
+            'users' => $users,
+            'title' => 'daftarkerja',
+            'message' => $message
         ]);
+
+        // return view('daftarkerja', [
+        //     'tugass' => Tugas::all(),
+        //     'bulans' => Bulan::all(),
+        //     'pics' => PicCategory::all(),
+        //     'categorys' => CategoryTugas::all(),
+        //     'users' => User::all(),
+        //     'title' => 'daftarkerja'
+        // ]);
     }
 
     public function show(Bulan $bulan)
@@ -107,14 +135,14 @@ class TugasController extends Controller
             $tugas->deskripsi = $request->deskripsi,
             $tugas->user_id = $request->user_id
         ]);
-        $tugas->save(); 
+        $tugas->save();
         return redirect('home')->with('success', 'Berhasil Upload Progres Tugas');
     }
 
-    public function upTerima(Tugas $tugas) {
+    public function upTerima(Tugas $tugas)
+    {
         $tugas->update([$tugas->status = 'Approve']);
 
         return redirect('daftarkerja')->with('success', 'Pekerjaan di Approve');
     }
-
 }

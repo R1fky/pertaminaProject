@@ -79,17 +79,19 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/daftartugas/edit/{tugas:id}', [TugasController::class, 'edit']);
 
     //menampilkan kerja atau tugas berdasarkan status
-    Route::get('daftartugas/status/progress', function() {
+    Route::get('daftartugas/status/progress', function () {
         return view('kategoriKerja.daftarKerjaProgress', [
             'title' => 'Status Kerja Progress',
+            'tugass' => Tugas::all(),
         ]);
     });
-    Route::get('daftartugas/status/approve', function() {
+    Route::get('daftartugas/status/approve', function () {
         return view('kategoriKerja.daftarKerjaApprove', [
             'title' => 'Status Kerja Aprove',
+            'tugass' => Tugas::all(),
         ]);
     });
-    Route::get('daftartugas/status/completed', function() {
+    Route::get('daftartugas/status/completed', function () {
         return view('kategoriKerja.daftarKerjaCompleted', [
             'title' => 'Status Kerja Compeleted',
         ]);

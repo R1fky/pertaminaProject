@@ -8,21 +8,42 @@ use App\Models\User;
 
 use Illuminate\Http\Request;
 use function Laravel\Prompts\alert;
+use function Laravel\Prompts\search;
+
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
 class TkjpController extends Controller
 {
-    public function show()
+    public function show(Request $request)
     {
-        return view(
-            'dataTkjp',
-            [
-                'users' => User::all(),
-                'roles' => Role::all(),
-                'title' => 'Daftar TKJP'
-            ]
-        );
+        if ($request->search) {
+            $users = User::where('name', 'LIKE', '%' . $request->search . '%')
+                ->get();
+            if ($users->count() == 0) {
+                $name = 'No results found for "' . $request->search . '"';
+            } else {
+                $name = 'Search results for "' . $request->search . '"';
+            }
+            return view(
+                'dataTkjp',
+                [
+                    'users' => $users,
+                    'roles' => Role::all(),
+                    'title' => $name,
+                    'search' => $request->search
+                ]
+            );
+        } else {
+            return view(
+                'dataTkjp',
+                [
+                    'users' => User::all(),
+                    'roles' => Role::all(),
+                    'title' => 'Daftar TKJP',
+                ]
+            );
+        }
     }
 
     public function add(Request $request)
