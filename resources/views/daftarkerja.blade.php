@@ -16,21 +16,16 @@
         <div class="d-flex align-items-center mb-4">
             <!-- Button trigger modal -->
             @can('organik')
-                <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#tambahTugas">
+                <button type="button" class="btn btn-outline-info me-2" data-bs-toggle="modal" data-bs-target="#tambahTugas">
                     <i class="bi bi-plus">Tambah tugas</i>
                 </button>
             @endcan
 
             <form action="{{ route('daftarkerja') }}" method="GET" class="d-flex">
                 <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
+                <button class="btn btn-outline-dark" type="submit"><i class="bi bi-search"></i></button>
             </form>
         </div>
-        {{-- <div class="d-flex align-items-center mb-4">
-            <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#tambahTugas">
-                <i class="bi bi-plus">Tambah tugas</i>
-            </button>
-        </div> --}}
         <table class="table table-striped ">
             @if (!empty($message))
                 <div class="alert alert-info">

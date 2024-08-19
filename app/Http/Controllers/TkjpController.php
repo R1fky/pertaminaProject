@@ -85,6 +85,9 @@ class TkjpController extends Controller
     //delete
     public function delete(User $user)
     {
+        if ($user->image) {
+            Storage::disk('public')->delete('images/' . $user->image);
+        }
         $user->delete();
 
         return redirect()->route('daftartkjp')->with('danger', 'data berhasil dihapus');
@@ -92,8 +95,32 @@ class TkjpController extends Controller
 
     public function edit(Request $request, User $user)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id . ',id',
+            'image' => 'required|mimes:png,jpg,jpeg,jfif',
+            'password' => 'required|string|min:8',
+            'bagian' => 'required|string|max:255',
+            'role_id' => 'required|integer',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+        ]);
 
-        $user->update($request->all());
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = date('Y-m-d') . $image->getClientOriginalName();
+            $path = 'images/' . $filename;
+            Storage::disk('public')->put($path, file_get_contents($image));
+
+            // Hapus file gambar lama jika ada
+            if ($user->image) {
+                Storage::disk('public')->delete('images/' . $user->image);
+            }
+
+            $user->image = $filename;
+        }
+
+        $user->update($request->except('image'));
 
         return redirect()->route('daftartkjp')->with('success', 'data berhasil diUpdate');
     }

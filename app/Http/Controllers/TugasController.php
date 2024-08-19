@@ -100,6 +100,9 @@ class TugasController extends Controller
 
     public function delete(Tugas $tugas)
     {
+        if ($tugas->document) {
+            Storage::disk('public')->delete('document/' . $tugas->document);
+        }
         $tugas->delete();
 
         return redirect()->route('daftarkerja')->with('danger', 'Data Berhasil Dihapus');

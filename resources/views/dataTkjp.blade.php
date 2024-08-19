@@ -19,7 +19,7 @@
             </div>
             <div class="col-md-6 col-sm-12">
                 <form class="d-flex flex-column flex-sm-row" role="search">
-                    <button type="button" class="btn btn-primary mb-2 mb-sm-0 me-sm-2" data-bs-toggle="modal"
+                    <button type="button" class="btn btn-outline-info mb-2 mb-sm-0 me-sm-2" data-bs-toggle="modal"
                         data-bs-target="#tambahTkjp">
                         <i class="bi bi-person-plus"></i>
                     </button>
@@ -28,7 +28,7 @@
                     <form action="{{ route('daftartkjp') }}" method="GET">
                         <input class="form-control me-2" type="search" name="search" placeholder="Search"
                             aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
+                        <button class="btn btn-outline-dark" type="submit"><i class="bi bi-search"></i></button>
                     </form>
                 </form>
             </div>
