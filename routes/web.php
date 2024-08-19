@@ -50,7 +50,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/daftartugas/{bulan:nama_bulan}', [TugasController::class, 'show']);
 
-    Route::post('/daftartugas/add', [TugasController::class, 'add'])->name('daftartugas.add');
+    Route::post('/daftartugas/add', [TugasController::class, 'add'])->name('daftartugas.add')->middleware('organik');
 
     Route::get('/kategorikerja/{category:category_name}', function (CategoryTugas $category) {
         return view('kategoriKerja.katKerja', [
@@ -99,7 +99,8 @@ Route::group(['middleware' => 'auth'], function () {
     // end 
 
     //daftar pekerja atau tkjp
-    Route::get('/daftartkjp', [TkjpController::class, 'show'])->name('daftartkjp');
+    Route::get('/daftartkjp', [TkjpController::class, 'show'])
+        ->name('daftartkjp');
 
     Route::post('/daftartkjp/add', [TkjpController::class, 'add'])->name('daftartkjp.add');
 

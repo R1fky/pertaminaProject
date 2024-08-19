@@ -7,29 +7,33 @@
                 <li class="nav-item {{ Request::is('home') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('home') }}">Home</a>
                 </li>
-                <li class="nav-item {{ Request::is('daftartkjp') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('daftartkjp') }}">Daftar TKJP</a>
-                </li>
+                @if (auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
+                    <li class="nav-item {{ Request::is('daftartkjp') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('daftartkjp') }}">Daftar TKJP</a>
+                    </li>
+                @endif
                 <li class="nav-item {{ Request::is('daftarkerja') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('daftarkerja') }}">Daftar Kerja</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Login
-                    </a>
-                    <ul class="dropdown-menu mt-2 ">
-                        <li><a class="dropdown-item" href="/profil">Profil</a></li>
-                        <li>
-                            <form action="/logout" method="post">
-                                @csrf
+                @auth
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            {{ auth()->user()->name }}
+                        </a>
+                        <ul class="dropdown-menu mt-2 ">
+                            <li><a class="dropdown-item" href="/profil">Profil</a></li>
+                            <li>
+                                <form action="/logout" method="post">
+                                    @csrf
 
-                                <button type="submit" class="dropdown-item px-3 border-0">Log- Out</button>
-                            </form>
-                        </li>
-                        {{-- <li><a class="dropdown-item" href="">Log- Out</a></li> --}}
-                    </ul>
-                </li>
+                                    <button type="submit" class="dropdown-item px-3 border-0">Log- Out</button>
+                                </form>
+                            </li>
+                            {{-- <li><a class="dropdown-item" href="">Log- Out</a></li> --}}
+                        </ul>
+                    </li>
+                @endauth
             </ul>
         </div>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"

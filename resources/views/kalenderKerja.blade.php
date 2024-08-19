@@ -9,14 +9,6 @@
         @endif
 
         <!-- Button trigger modal -->
-        <div class="d-flex align-items-center mb-4">
-            <select class="form-select form-select-sm ms-2" style="width: 110px;" aria-label="Default select example">
-                <option selected>Category</option>
-                @foreach ($categorys as $category)
-                    <option value="{{ $category->id }}">{{ $category->category_name }}</option>
-                @endforeach
-            </select>
-        </div>
 
         <table class="table table-striped ">
             <thead>
@@ -76,7 +68,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Info Tugas
-                            {{ $category->category_name }}
+                            {{ $tugas->category->category_name }}
                         </h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -144,7 +136,18 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success">Terima</button>
+                        <form action="/updateprogres/terima/{{ $tugas->id }}" method="POST">
+                            @csrf
+                            @if ($tugas->status === 'Approve')
+                                @can('organik')
+                                    <button type="submit" class="btn btn-success" disabled>Terima</button>
+                                @endcan
+                            @else
+                                @if (auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
+                                    <button type="submit" class="btn btn-success">Terima</button>
+                                @endif
+                            @endif
+                        </form>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>

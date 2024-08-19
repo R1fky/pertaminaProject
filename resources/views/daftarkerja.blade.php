@@ -15,9 +15,11 @@
 
         <div class="d-flex align-items-center mb-4">
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#tambahTugas">
-                <i class="bi bi-plus">Tambah tugas</i>
-            </button>
+            @can('organik')
+                <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#tambahTugas">
+                    <i class="bi bi-plus">Tambah tugas</i>
+                </button>
+            @endcan
 
             <form action="{{ route('daftarkerja') }}" method="GET" class="d-flex">
                 <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
@@ -35,7 +37,7 @@
                     {{ $message }}
                     <a href="{{ route('daftarkerja') }}"><i class="bi bi-skip-backward"></i> Kembali ke Daftar Kerja</a>
                 </div>
-            @endif  
+            @endif
             <thead>
                 <tr>
                     <th scope="col" class="text-center">No</th>
@@ -64,12 +66,14 @@
                                     data-bs-target="#infoTugas{{ $tugas->id }}"><i class="bi bi-info-lg"></i>
                                     </i>
                                 </button>
-                                <button type="button" class="btn btn-warning btn-sm me-2" data-bs-toggle="modal"
-                                    data-bs-target="#editTugas{{ $tugas->id }}"><i class="bi bi-pencil-square"></i>
-                                </button>
-                                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#deleteTugas{{ $tugas->id }}"><i class="bi bi-trash3"></i></i>
-                                </button>
+                                @can('organik')
+                                    <button type="button" class="btn btn-warning btn-sm me-2" data-bs-toggle="modal"
+                                        data-bs-target="#editTugas{{ $tugas->id }}"><i class="bi bi-pencil-square"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#deleteTugas{{ $tugas->id }}"><i class="bi bi-trash3"></i></i>
+                                    </button>
+                                @endcan
                             </div>
                         </td>
                     </tr>
@@ -289,9 +293,13 @@
                         <form action="/updateprogres/terima/{{ $tugas->id }}" method="POST">
                             @csrf
                             @if ($tugas->status === 'Approve')
-                                <button type="submit" class="btn btn-success" disabled>Terima</button>
+                                @can('organik')
+                                    <button type="submit" class="btn btn-success" disabled>Terima</button>
+                                @endcan
                             @else
-                                <button type="submit" class="btn btn-success">Terima</button>
+                                @if (auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
+                                    <button type="submit" class="btn btn-success">Terima</button>
+                                @endif
                             @endif
                         </form>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

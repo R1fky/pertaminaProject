@@ -16,6 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'manager' => \App\Http\Middleware\Manager::class,
             'user' => \App\Http\Middleware\User::class,
+            'organik' => \App\Http\Middleware\Organik::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

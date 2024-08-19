@@ -133,7 +133,18 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-success">Terima</button>
+                            <form action="/updateprogres/terima/{{ $tgs->id }}" method="POST">
+                                @csrf
+                                @if ($tgs->status === 'Approve')
+                                    @can('organik')
+                                        <button type="submit" class="btn btn-success" disabled>Terima</button>
+                                    @endcan
+                                @else
+                                    @if (auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
+                                        <button type="submit" class="btn btn-success">Terima</button>
+                                    @endif
+                                @endif
+                            </form>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
                     </div>
