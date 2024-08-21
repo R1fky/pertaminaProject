@@ -144,8 +144,19 @@ class TugasController extends Controller
 
     public function upTerima(Tugas $tugas)
     {
-        $tugas->update([$tugas->status = 'Approve']);
+        $tugas->update(['status' => 'Approve']);
 
         return redirect('daftarkerja')->with('success', 'Pekerjaan di Approve');
+    }
+
+    public function updateProgres(Request $request, Tugas $tugas)
+    {
+        if ($request->input('action') === 'terima') {
+            $tugas->update(['status' => 'Approve']);
+            return redirect('daftarkerja')->with('success', 'Pekerjaan telah Di Approve!');
+        } elseif ($request->input('action') === 'complite') {
+            $tugas->update(['status' => 'Complite']);
+            return redirect('daftarkerja')->with('success', 'Pekerjaan Complite');
+        }
     }
 }

@@ -21,7 +21,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (auth()->user()->tugas->where('status', 'completed') as $no => $tugas)
+                @foreach (auth()->user()->tugas->where('status', 'Complite') as $no => $tugas)
                     <tr>
                         <td class="text-center">{{ $no }}</td>
                         <td>{{ $tugas->nama_tugas }}</td>

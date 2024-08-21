@@ -136,16 +136,24 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <form action="/updateprogres/terima/{{ $tugas->id }}" method="POST">
+                        <form action="/update/progressStatus/{{ $tugas->id }}" method="POST">
                             @csrf
-                            @if ($tugas->status === 'Approve')
-                                @can('organik')
-                                    <button type="submit" class="btn btn-success" disabled>Terima</button>
-                                @endcan
-                            @else
-                                @if (auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
-                                    <button type="submit" class="btn btn-success">Terima</button>
+                            @if (auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
+                                @if ($tugas->status === 'Approve')
+                                    @if (auth()->user()->role_id == 1)
+                                        <!-- hanya manager yang dapat mengakses tombol Complite -->
+                                        <button type="submit" name="action" value="complite"
+                                            class="btn btn-success"
+                                            {{ $tugas->status === 'Complite' ? 'disabled' : '' }}>Complite</button>
+                                    @endif
+                                @elseif ($tugas->status === 'Complite')
+                                    <button type="submit" name="action" value="complite" class="btn btn-success"
+                                        disabled>Complite</button>
+                                @else
+                                    <button type="submit" name="action" value="terima"
+                                        class="btn btn-success">Terima</button>
                                 @endif
+                            @else
                             @endif
                         </form>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

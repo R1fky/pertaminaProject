@@ -62,10 +62,21 @@
                                 <a href="/kategorikerja/{{ $category->category_name }}"
                                     style="text-decoration: none; color: inherit;">{{ $category->category_name }}</a>
                             </h5>
-                            <h6 class="card-subtitle mb-2 text-body-secondary">Jumlah Tugas</h6>
-                            <div class="progress" role="progressbar" aria-label="Info example" aria-valuenow="50"
-                                aria-valuemin="0" aria-valuemax="100">
-                                <div class="progress-bar bg-info text-dark" style="width: 50%">50%</div>
+                            <h6 class="card-subtitle mb-2 text-body-secondary">Jumlah tugas:
+                                {{ $category->tugas->count() }}</h6>
+
+                            @php
+                                $approvedTasks = $category->tugas->where('status', 'Complite')->count();
+                                $totalTasks = $category->tugas->count();
+                                $approvedTasksPercentage =
+                                    $totalTasks > 0 ? floor(($approvedTasks / $totalTasks) * 100) : 0;
+                            @endphp
+
+                            <div class="progress" role="progressbar" aria-label="Info example"
+                                aria-valuenow="{{ $approvedTasksPercentage }}" aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar bg-info text-dark"
+                                    style="width: {{ $approvedTasksPercentage }}%"> {{ $approvedTasksPercentage }}%
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -87,6 +98,8 @@
                     <div class="card" style="width: 100%; margin-bottom: 20px;">
                         <div class="card-body">
                             <h5 class="card-title">{{ $bulan->nama_bulan }}</h5>
+                            <h6 class="card-subtitle mb-2 text-body-secondary">Jumlah tugas:
+                                {{ $bulan->tugas->count() }}</h6>
                             <h6 class="card-subtitle mb-2 text-body-secondary"></h6>
                             <a href="/daftartugas/{{ $bulan->nama_bulan }}" class="btn btn-outline-info btn-sm">Lihat
                                 Tugas</a>

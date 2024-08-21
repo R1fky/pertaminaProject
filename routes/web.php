@@ -73,6 +73,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     //update progres terima belum sempurna
     Route::post('/updateprogres/terima/{tugas:id}', [TugasController::class, 'upTerima']);
+    Route::post('/update/progressStatus/{tugas:id}', [TugasController::class, 'updateProgres']);
     //delete tugas
     Route::get('/daftartugas/delete/{tugas:id}', [TugasController::class, 'delete']);
 
