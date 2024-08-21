@@ -25,14 +25,15 @@
                 <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-dark" type="submit"><i class="bi bi-search"></i></button>
             </form>
+
         </div>
         <table class="table table-striped ">
-            @if (!empty($message))
+            {{-- @if (!empty($message))
                 <div class="alert alert-info">
                     {{ $message }}
                     <a href="{{ route('daftarkerja') }}"><i class="bi bi-skip-backward"></i> Kembali ke Daftar Kerja</a>
                 </div>
-            @endif
+            @endif --}}
             <thead>
                 <tr>
                     <th scope="col" class="text-center">No</th>
@@ -74,6 +75,14 @@
                     </tr>
                 @endforeach
             </tbody>
+            @if (request()->input('search'))
+                <a href="{{ route('daftarkerja') }}" class="btn btn-danger mb-3"><i class="bi bi-skip-backward"></i>
+                    @if ($message)
+                        {{ $message }}
+                    @endif
+                    Kembali ke Daftar Kerja
+                </a>
+            @endif
         </table>
     </div>
 
