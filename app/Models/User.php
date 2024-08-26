@@ -69,4 +69,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Tugas::class, 'user_id');
     }
+
+    public function pic(): BelongsTo
+    {
+        return $this->belongsTo(PicCategory::class);
+    }
+
+    
 }

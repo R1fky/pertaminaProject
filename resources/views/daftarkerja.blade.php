@@ -177,11 +177,24 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="user_id" class="form-label">User</label>
+                                <select class="form-select @error('user_id') is-invalid @enderror"
+                                    aria-label="Default select example" name="user_id" id="user_id">
+                                    <option selected value="">Pilih User (optional)</option>
+                                    @foreach ($users as $user)
+                                        @if ($user->pic_id != null)
+                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                                @error('user_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                                {{-- <label for="user_id" class="form-label">User</label>
                                 <input type="text" class="form-control @error('user_id') is-invalid @enderror"
                                     id="user_id" name="user_id" value="{{ old('user_id') }}">
                                 @error('user_id')
                                     <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                                @enderror --}}
                             </div>
                         </div>
                         <div class="mb-3">

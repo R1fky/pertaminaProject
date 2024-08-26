@@ -9,6 +9,7 @@ use App\Models\Tugas;
 use App\Models\PicCategory;
 use Illuminate\Http\Request;
 use App\Models\CategoryTugas;
+use App\Models\Notifikasi;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
@@ -80,6 +81,7 @@ class TugasController extends Controller
             'bulan_id' => 'required',
             'category_id' => 'required|integer',
             'pic_id' => 'required|integer',
+            'user_id' => 'nullable|integer',
             'deskripsi' => 'required|string|max:255',
         ]);
 
@@ -95,8 +97,17 @@ class TugasController extends Controller
         $tugas->save();
 
         if ($tugas->save()) {
-            $user = $tugas->user;
-            Mail::to($user->email)->send(new TugasNotif);
+            if ($tugas->user_id) { // check if user_id is not null
+                $user = $tugas->user;
+                Mail::to($user->email)->send(new TugasNotif);
+
+                Session::flash('success', 'Tugas berhasil ditambahkan!');
+                return redirect()->route('daftarkerja');
+            }
+            // $user = $tugas->user;
+
+            // Mail::to($user->email)->send(new TugasNotif);
+
             Session::flash('success', 'Tugas berhasil ditambahkan!');
             return redirect()->route('daftarkerja');
         }

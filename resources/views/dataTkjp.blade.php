@@ -57,6 +57,7 @@
                                             <h5 class="card-title">{{ $user->name }}</h5>
                                             <h5>{{ $user->bagian }}</h5>
                                             <h5>{{ $user->role->role_name }}</h5>
+                                            <h5>{{ $user->pic ? $user->pic->name_pic : '' }}</h5>
                                             {{-- menampilkan Role  --}}
                                             {{-- btn edit data --}}
                                             <button type="button" class="btn btn-warning mb-2 mb-sm-0 me-sm-2"
@@ -414,7 +415,8 @@
                                                                             class="form-select @error('bagian') is-invalid @enderror"
                                                                             aria-label="Default select example"
                                                                             name="bagian">
-                                                                            <option selected>{{ $user->bagian }}</option>
+                                                                            <option selected>{{ $user->bagian }}
+                                                                            </option>
                                                                             <option value="Health">Health</option>
                                                                             <option value="Safety">Safety</option>
                                                                             <option value="Security">Security</option>
@@ -632,6 +634,22 @@
                                         @error('role_id')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label for="pic_id" class="form-label">PIC</label>
+                                        <select class="form-select @error('pic_id') is-invalid @enderror"
+                                            aria-label="Default select example" name="pic_id">
+                                            <option value="">Pilih PIC</option>
+                                            @foreach ($pics as $pic)
+                                                <option value="{{ $pic->id }}"
+                                                    {{ old('pic_id') == $pic->id ? 'selected' : '' }}>
+                                                    {{ $pic->name_pic }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>

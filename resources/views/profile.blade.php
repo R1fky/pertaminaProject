@@ -41,9 +41,12 @@
                                     <i class="bi bi-menu-down"></i> Other Menu
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="/daftartugas/status/progress">Daftar Tugas Menunggu Review</a></li>
-                                    <li><a class="dropdown-item" href="/daftartugas/status/approve">Daftar Tugas Aproval</a></li>
-                                    <li><a class="dropdown-item" href="/daftartugas/status/completed">Daftar Tugas Compeleted</a></li>
+                                    <li><a class="dropdown-item" href="/daftartugas/status/progress">Daftar Tugas
+                                            Menunggu Review</a></li>
+                                    <li><a class="dropdown-item" href="/daftartugas/status/approve">Daftar Tugas
+                                            Aproval</a></li>
+                                    <li><a class="dropdown-item" href="/daftartugas/status/completed">Daftar Tugas
+                                            Compeleted</a></li>
                                 </ul>
                             </div>
                             <a href="#" class="btn btn-outline-info me-2" style="min-width: 150px;"><i

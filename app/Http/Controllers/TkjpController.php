@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PicCategory;
 use App\Models\Role;
 use App\Models\Tugas;
 use App\Models\User;
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Storage;
 
 class TkjpController extends Controller
 {
-    public function show(Request $request)
+    public function show(Request $request,)
     {
         if ($request->search) {
             $users = User::where('name', 'LIKE', '%' . $request->search . '%')
@@ -30,6 +31,7 @@ class TkjpController extends Controller
                 [
                     'users' => $users,
                     'roles' => Role::all(),
+                    'pics' => PicCategory::all(),
                     'title' => $name,
                     'search' => $request->search
                 ]
@@ -40,6 +42,7 @@ class TkjpController extends Controller
                 [
                     'users' => User::all(),
                     'roles' => Role::all(),
+                    'pics' => PicCategory::all(),
                     'title' => 'Daftar TKJP',
                 ]
             );
@@ -54,8 +57,8 @@ class TkjpController extends Controller
             'image' => 'required|mimes:png,jpg,jpeg,jfif',
             'password' => 'required|string|min:8|',
             'bagian' => 'required|string',
-            // 'bagian' => 'required|string|max:255',
             'role_id' => 'required|integer',
+            'pic_id' => 'nullable|integer',
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
         ]);
@@ -72,6 +75,7 @@ class TkjpController extends Controller
         $user->password = bcrypt($request->password);
         $user->bagian = $request->bagian;
         $user->role_id = $request->role_id;
+        $user->pic_id = $request->pic_id;
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
         $user->image = $filename;
