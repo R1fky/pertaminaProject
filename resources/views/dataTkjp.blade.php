@@ -51,7 +51,6 @@
                     @if (auth()->user()->role_id === 2 || auth()->user()->role_id === 1)
                         @if ($user->role_id === 3)
                             <div class="col-lg-4">
-                                {{-- @if (auth()->user->role_id !== 2 && auth()->user->role_id !== 1) --}}
                                 <div class="card mt-5" style="width: 100%; max-width: 500px;">
                                     <div class="card-body row">
                                         <div class="col-md-8">
@@ -183,15 +182,19 @@
                                                                         <div class="mb-3">
                                                                             <label for="bagian"
                                                                                 class="form-label">Bagian</label>
-                                                                            <input type="text"
-                                                                                class="form-control @error('bagian') is-invalid @enderror"
-                                                                                id="bagian" name="bagian"
-                                                                                value="{{ $user->bagian }}">
-                                                                            @error('bagian')
-                                                                                <div class="invalid-feedback">
-                                                                                    {{ $message }}
-                                                                                </div>
-                                                                            @enderror
+                                                                            <select
+                                                                                class="form-select @error('bagian') is-invalid @enderror"
+                                                                                aria-label="Default select example"
+                                                                                name="bagian">
+                                                                                <option selected>{{ $user->bagian }}
+                                                                                </option>
+                                                                                <option value="Health">Health</option>
+                                                                                <option value="Safety">Safety</option>
+                                                                                <option value="Security">Security
+                                                                                </option>
+                                                                                <option value="Environment">Environment
+                                                                                </option>
+                                                                            </select>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -276,7 +279,6 @@
                         @endif
                     @else
                         <div class="col-lg-4">
-                            {{-- @if (auth()->user->role_id !== 2 && auth()->user->role_id !== 1) --}}
                             <div class="card mt-5" style="width: 100%; max-width: 500px;">
                                 <div class="card-body row">
                                     <div class="col-md-8">
@@ -408,15 +410,17 @@
                                                                     <div class="mb-3">
                                                                         <label for="bagian"
                                                                             class="form-label">Bagian</label>
-                                                                        <input type="text"
-                                                                            class="form-control @error('bagian') is-invalid @enderror"
-                                                                            id="bagian" name="bagian"
-                                                                            value="{{ $user->bagian }}">
-                                                                        @error('bagian')
-                                                                            <div class="invalid-feedback">
-                                                                                {{ $message }}
-                                                                            </div>
-                                                                        @enderror
+                                                                        <select
+                                                                            class="form-select @error('bagian') is-invalid @enderror"
+                                                                            aria-label="Default select example"
+                                                                            name="bagian">
+                                                                            <option selected>{{ $user->bagian }}</option>
+                                                                            <option value="Health">Health</option>
+                                                                            <option value="Safety">Safety</option>
+                                                                            <option value="Security">Security</option>
+                                                                            <option value="Environment">Environment
+                                                                            </option>
+                                                                        </select>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -570,9 +574,22 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="bagian" class="form-label">Bagian</label>
-                                        <input type="text"
+                                        <select class="form-select @error('bagian') is-invalid @enderror"
+                                            aria-label="Default select example" name="bagian">
+                                            <option selected>Pilih Bagian</option>
+                                            <option value="Health">Health</option>
+                                            <option value="Safety">Safety</option>
+                                            <option value="Security">Security</option>
+                                            <option value="Environment">Environment</option>
+                                        </select>
+                                        @error('bagian')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                        {{-- <input type="text"
                                             class="form-control @error('bagian') is-invalid @enderror" id="bagian"
-                                            name="bagian" value="{{ old('bagian') }}">
+                                            name="bagian" value="{{ old('bagian') }}"> --}}
                                         @error('bagian')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror

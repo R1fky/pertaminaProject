@@ -8,12 +8,15 @@ use App\Models\PicCategory;
 use App\Models\CategoryTugas;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Routing\RouteRegistrar;
 use App\Http\Controllers\TkjpController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TugasController;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
+
+
 
 Route::get('/', function () {
     return view('login');

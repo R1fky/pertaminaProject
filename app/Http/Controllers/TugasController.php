@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TugasNotif;
 use App\Models\User;
 use App\Models\Bulan;
 use App\Models\Tugas;
 use App\Models\PicCategory;
 use Illuminate\Http\Request;
 use App\Models\CategoryTugas;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use League\CommonMark\Node\Block\Document;
@@ -80,6 +82,7 @@ class TugasController extends Controller
             'pic_id' => 'required|integer',
             'deskripsi' => 'required|string|max:255',
         ]);
+
         $tugas = new Tugas();
         $tugas->nama_tugas = $request->nama_tugas;
         $tugas->frekuensi = $request->frekuensi;
@@ -87,12 +90,13 @@ class TugasController extends Controller
         $tugas->category_id = $request->category_id;
         $tugas->pic_id = $request->pic_id;
         $tugas->status = 'belum';
-
+        $tugas->user_id = $request->user_id;
         $tugas->deskripsi = $request->deskripsi;
-
         $tugas->save();
 
         if ($tugas->save()) {
+            $user = $tugas->user;
+            Mail::to($user->email)->send(new TugasNotif);
             Session::flash('success', 'Tugas berhasil ditambahkan!');
             return redirect()->route('daftarkerja');
         }
@@ -140,13 +144,6 @@ class TugasController extends Controller
         ]);
         $tugas->save();
         return redirect('home')->with('success', 'Berhasil Upload Progres Tugas');
-    }
-
-    public function upTerima(Tugas $tugas)
-    {
-        $tugas->update(['status' => 'Approve']);
-
-        return redirect('daftarkerja')->with('success', 'Pekerjaan di Approve');
     }
 
     public function updateProgres(Request $request, Tugas $tugas)

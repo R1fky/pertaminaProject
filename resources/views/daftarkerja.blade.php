@@ -175,6 +175,14 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <label for="user_id" class="form-label">User</label>
+                                <input type="text" class="form-control @error('user_id') is-invalid @enderror"
+                                    id="user_id" name="user_id" value="{{ old('user_id') }}">
+                                @error('user_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="deskripsi" class="form-label">Deskripsi</label>
@@ -184,6 +192,7 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+
                         <button class="btn btn-primary">Save changes</button>
                     </form>
                     {{-- end form validate  --}}
@@ -284,13 +293,28 @@
                             <div class="col">
                                 @foreach ($users as $user)
                                     @if ($tugas->user_id == $user->id)
-                                        <p class="card-text">Upload By : <span
+                                        @if ($tugas->document)
+                                            <p class="card-text">Upload By : <span
+                                                    style="color: #373A40; font-weight: bold">{{ $user->name }}</span>
+                                        @endif
+                                        <p class="card-text">To : <span
                                                 style="color: #373A40; font-weight: bold">{{ $user->name }}</span>
                                     @endif
                                 @endforeach
-
                             </div>
                         </div>
+                        {{-- <div class="row mt-3">
+                            <div class="col">
+                                @foreach ($users as $user)
+                                    @if ($tugas->user_id == $user->id)
+                                        <p class="card-text">Upload By : <span
+                                                style="color: #373A40; font-weight: bold">{{ $user->name }}</span>
+                                        <p class="card-text">To : <span
+                                                style="color: #373A40; font-weight: bold">{{ $user->name }}</span>
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div> --}}
 
                     </div>
                     <div class="modal-footer">
