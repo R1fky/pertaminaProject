@@ -99,14 +99,18 @@ class TugasController extends Controller
         if ($tugas->save()) {
             if ($tugas->user_id) { // check if user_id is not null
                 $user = $tugas->user;
+
+                $notifikasi = new Notifikasi();
+                $notifikasi->user_id = $user->id;
+                $notifikasi->tugas_id = $tugas->id;
+                $notifikasi->pesan = 'Anda Mendapatkan Tugas Baru';
+
+                $notifikasi->save();
                 Mail::to($user->email)->send(new TugasNotif);
 
                 Session::flash('success', 'Tugas berhasil ditambahkan!');
                 return redirect()->route('daftarkerja');
             }
-            // $user = $tugas->user;
-
-            // Mail::to($user->email)->send(new TugasNotif);
 
             Session::flash('success', 'Tugas berhasil ditambahkan!');
             return redirect()->route('daftarkerja');

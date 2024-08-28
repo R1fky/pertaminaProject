@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notifikasi;
 use App\Models\PicCategory;
 use App\Models\Role;
 use App\Models\Tugas;

@@ -75,5 +75,9 @@ class User extends Authenticatable
         return $this->belongsTo(PicCategory::class);
     }
 
+    public function notifikasi(): HasMany {
+        return $this->hasMany(Notifikasi::class, 'user_id');
+    }
+
     
 }
