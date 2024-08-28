@@ -81,15 +81,21 @@
                 </div>
                 <div class="modal-body">
                     <ul>
-                        @if (auth()->user()->notifikasi->where('tugas.status', '!=', 'progress')->count() > 0)
-                            @foreach (auth()->user()->notifikasi->where('tugas.status', '!=', 'progress') as $notifikasi)
+                        @foreach (auth()->user()->notifikasi as $notifikasi)
+                            @if ($notifikasi->tugas->status == 'belum')
                                 <li>{{ $notifikasi->pesan }} >> <a
                                         href="/updatetugas/{{ $notifikasi->tugas_id }}">{{ $notifikasi->tugas->nama_tugas }}</a>
                                 </li>
-                            @endforeach
-                        @else
+                            @endif
+                        @endforeach
+                        @if (!auth()->user()->notifikasi->where('tugas.status', 'belum')->count())
                             <li>Belum ada tugas</li>
                         @endif
+                        {{-- @foreach (auth()->user()->notifikasi as $notifikasi)
+                            <li>{{ $notifikasi->pesan }} >> <a
+                                    href="/updatetugas/{{ $notifikasi->tugas_id }}">{{ $notifikasi->tugas->nama_tugas }}</a>
+                            </li>
+                        @endforeach --}}
                     </ul>
                 </div>
                 <div class="modal-footer">
